@@ -13,7 +13,12 @@
             </p>
 
             <a href="/products" class="btn">Shop Now</a>
-            <a href="/login" class="btn btn-secondary">Login</a>
+
+            @auth
+                <a href="/dashboard" class="btn btn-secondary">My Dashboard</a>
+            @else
+                <a href="/login" class="btn btn-secondary">Login</a>
+            @endauth
         </div>
 
         <div class="hero-card">
