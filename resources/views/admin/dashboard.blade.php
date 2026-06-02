@@ -7,6 +7,8 @@
     <div class="admin-box">
         <h2>Admin Dashboard</h2>
         <p>This page shows products from the database. Product management will be added later.</p>
+        <br>
+        <a href="{{ route('admin.products.index') }}" class="btn">Manage Products</a>
 
         <table>
             <thead>
