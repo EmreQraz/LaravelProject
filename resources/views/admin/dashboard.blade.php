@@ -5,9 +5,29 @@
 @section('content')
 
     <div class="admin-box">
-        <h2>Admin Dashboard</h2>
-        <p>This page shows products from the database. Product management will be added later.</p>
-        <br>
+        <h2>QrazCart Admin Dashboard</h2>
+        <p>
+            Welcome to the admin panel. From this area, administrators can manage products,
+            monitor stock information, and control the e-commerce system.
+        </p>
+
+        <div class="admin-stats">
+            <div class="stat-card">
+                <h3>{{ $products->count() }}</h3>
+                <p>Total Products</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>{{ $categories->count() }}</h3>
+                <p>Total Categories</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>{{ $products->sum('stock') }}</h3>
+                <p>Total Stock</p>
+            </div>
+        </div>
+
         <a href="{{ route('admin.products.index') }}" class="btn">Manage Products</a>
 
         <table>
@@ -25,7 +45,7 @@
             @foreach($products as $product)
                 <tr>
                     <td>{{ $product->id }}</td>
-                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->icon }} {{ $product->name }}</td>
                     <td>{{ $product->category->name }}</td>
                     <td>${{ $product->price }}</td>
                     <td>{{ $product->stock }}</td>
