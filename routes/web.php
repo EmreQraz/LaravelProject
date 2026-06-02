@@ -29,7 +29,7 @@ Route::get('/admin', function () {
     $categories = Category::all();
 
     return view('admin.dashboard', compact('products', 'categories'));
-});
+})->middleware('admin');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
