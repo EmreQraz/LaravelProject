@@ -1,59 +1,211 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# LaravelShop - Advanced Web Programming Final Project
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+LaravelShop is a Laravel-based e-commerce web application developed for the Advanced Web Programming course.
 
-## About Laravel
+## Project Description
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This project is a simple e-commerce website built with Laravel.  
+It includes product listing, product detail pages, user authentication, role-based authorization, and an admin panel for product management.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The main purpose of this project is to demonstrate Laravel project structure, database usage, authentication, authorization, Blade templates, and GitHub version control.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Project Features
 
-## Learning Laravel
+- Laravel project structure
+- Homepage with product categories
+- Product listing page
+- Product detail page
+- Database-driven products and categories
+- User registration and login system
+- Laravel Breeze authentication
+- Role-based authorization system
+- Admin-only dashboard
+- Admin product management
+    - Create products
+    - List products
+    - Update products
+    - Delete products
+- Git and GitHub version control
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Technologies Used
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP
+- Laravel
+- Blade Template Engine
+- SQLite Database
+- Laravel Breeze
+- HTML
+- CSS
+- JavaScript
+- Git
+- GitHub
 
-## Laravel Sponsors
+## User Roles
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+The project includes two main roles:
 
-### Premium Partners
+- admin
+- user
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Only users with the admin role can access the admin panel and product management pages.
 
-## Contributing
+## Admin Account
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Use the following account to access the admin panel:
 
-## Code of Conduct
+```txt
+Email: admin@example.com
+Password: password
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Main Pages
 
-## Security Vulnerabilities
+```txt
+/
+Homepage
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```txt
+/products
+Product listing page
+```
 
-## License
+```txt
+/products/{id}
+Product detail page
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```txt
+/login
+User login page
+```
+
+```txt
+/register
+User registration page
+```
+
+```txt
+/dashboard
+Authenticated user dashboard
+```
+
+```txt
+/admin
+Admin dashboard
+```
+
+```txt
+/admin/products
+Admin product management page
+```
+
+```txt
+/admin/products/create
+Create new product page
+```
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/EmreOraz/LaravelProject.git
+```
+
+Go to the project folder:
+
+```bash
+cd LaravelProject
+```
+
+Install PHP dependencies:
+
+```bash
+composer install
+```
+
+Install frontend dependencies:
+
+```bash
+npm install
+```
+
+Create environment file:
+
+```bash
+copy .env.example .env
+```
+
+Generate application key:
+
+```bash
+php artisan key:generate
+```
+
+Run migrations and seeders:
+
+```bash
+php artisan migrate --seed
+```
+
+Build frontend files:
+
+```bash
+npm run build
+```
+
+Start Laravel development server:
+
+```bash
+php artisan serve
+```
+
+Open the project in browser:
+
+```txt
+http://127.0.0.1:8000
+```
+
+## GitHub Commit Progress
+
+The project was developed step by step with Git commits:
+
+1. Initial Laravel project setup
+2. Add homepage and basic layout
+3. Add product pages and route structure
+4. Add database models migrations and seeders
+5. Add authentication system with Breeze
+6. Add role system and admin protection
+7. Add admin product management
+8. Final cleanup and documentation
+
+## Project Structure
+
+```txt
+app/Models
+Category, Product, Role, User models
+
+app/Http/Controllers/Admin
+Admin ProductController
+
+app/Http/Middleware
+AdminMiddleware
+
+database/migrations
+Database table definitions
+
+database/seeders
+Default categories, products, roles, and admin user
+
+resources/views
+Blade template files
+
+routes/web.php
+Web routes
+```
+
+## Final Notes
+
+This project was created as a final project for the Advanced Web Programming course.  
+It demonstrates Laravel MVC structure, authentication, authorization, database relationships, CRUD operations, and GitHub usage.
