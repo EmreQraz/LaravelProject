@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LaravelShop - E-Commerce</title>
+    <title>@yield('title', 'LaravelShop')</title>
 
     <style>
         * {
@@ -38,6 +38,16 @@
             font-weight: bold;
         }
 
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+
         .hero {
             padding: 80px 60px;
             background: linear-gradient(to right, #1f2937, #4b5563);
@@ -63,6 +73,8 @@
             border-radius: 6px;
             text-decoration: none;
             font-weight: bold;
+            border: none;
+            cursor: pointer;
         }
 
         .section {
@@ -127,6 +139,48 @@
             margin: 12px 0;
         }
 
+        .detail-box {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .detail-icon {
+            font-size: 90px;
+            margin-bottom: 20px;
+        }
+
+        .admin-box {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #111827;
+            color: white;
+        }
+
         .footer {
             background-color: #111827;
             color: white;
@@ -165,66 +219,27 @@
 
 <nav class="navbar">
     <h1>LaravelShop</h1>
+
     <div>
-        <a href="#">Dashboard</a>
-        <a href="#">Products</a>
-        <a href="#">Login</a>
-        <a href="#">Admin</a>
+        <a href="/">Home</a>
+        <a href="/products">Products</a>
+        <a href="/admin">Admin</a>
+
+        @auth
+            <a href="/dashboard">Dashboard</a>
+
+            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                @csrf
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        @else
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        @endauth
     </div>
 </nav>
 
-<section class="hero">
-    <h2>Welcome to LaravelShop</h2>
-    <p>Modern Laravel based e-commerce project for Advanced Web Programming course.</p>
-    <a href="#" class="btn">View Products</a>
-</section>
-
-<section class="section">
-    <h2>Categories</h2>
-
-    <div class="categories">
-        <div class="category-card">Electronics</div>
-        <div class="category-card">Fashion</div>
-        <div class="category-card">Books</div>
-        <div class="category-card">Dashboard & Living</div>
-    </div>
-</section>
-
-<section class="section">
-    <h2>Featured Products</h2>
-
-    <div class="products">
-        <div class="product-card">
-            <div class="product-image">💻</div>
-            <div class="product-info">
-                <h3>Laptop</h3>
-                <p>High performance laptop for daily work.</p>
-                <div class="price">$899</div>
-                <a href="#" class="btn">Details</a>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">📱</div>
-            <div class="product-info">
-                <h3>Smartphone</h3>
-                <p>Latest generation smartphone.</p>
-                <div class="price">$699</div>
-                <a href="#" class="btn">Details</a>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">🎧</div>
-            <div class="product-info">
-                <h3>Headphones</h3>
-                <p>Wireless headphones with clear sound.</p>
-                <div class="price">$149</div>
-                <a href="#" class="btn">Details</a>
-            </div>
-        </div>
-    </div>
-</section>
+@yield('content')
 
 <footer class="footer">
     <p>© 2026 LaravelShop | Advanced Web Programming Final Project</p>

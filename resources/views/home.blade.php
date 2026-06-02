@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.shop')
 
 @section('title', 'Home - LaravelShop')
 
