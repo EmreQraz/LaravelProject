@@ -14,10 +14,11 @@
         <h2>Categories</h2>
 
         <div class="categories">
-            <div class="category-card">Electronics</div>
-            <div class="category-card">Fashion</div>
-            <div class="category-card">Books</div>
-            <div class="category-card">Home & Living</div>
+            @foreach($categories as $category)
+                <div class="category-card">
+                    {{ $category->name }}
+                </div>
+            @endforeach
         </div>
     </section>
 
@@ -27,13 +28,13 @@
         <div class="products">
             @foreach($products as $product)
                 <div class="product-card">
-                    <div class="product-image">{{ $product['icon'] }}</div>
+                    <div class="product-image">{{ $product->icon }}</div>
 
                     <div class="product-info">
-                        <h3>{{ $product['name'] }}</h3>
-                        <p>{{ $product['description'] }}</p>
-                        <div class="price">${{ $product['price'] }}</div>
-                        <a href="/products/{{ $product['id'] }}" class="btn">Details</a>
+                        <h3>{{ $product->name }}</h3>
+                        <p>{{ $product->description }}</p>
+                        <div class="price">${{ $product->price }}</div>
+                        <a href="/products/{{ $product->id }}" class="btn">Details</a>
                     </div>
                 </div>
             @endforeach

@@ -6,33 +6,29 @@
 
     <div class="admin-box">
         <h2>Admin Dashboard</h2>
-        <p>This page will be used to manage products, categories, and users.</p>
+        <p>This page shows products from the database. Product management will be added later.</p>
 
         <table>
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Module</th>
-                <th>Status</th>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
             </tr>
             </thead>
 
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Product Management</td>
-                <td>Planned</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>User Management</td>
-                <td>Planned</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Role Management</td>
-                <td>Planned</td>
-            </tr>
+            @foreach($products as $product)
+                <tr>
+                    <td>{{ $product->id }}</td>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->category->name }}</td>
+                    <td>${{ $product->price }}</td>
+                    <td>{{ $product->stock }}</td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
