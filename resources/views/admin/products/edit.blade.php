@@ -1,6 +1,6 @@
 @extends('layouts.shop')
 
-@section('title', 'Edit Product - LaravelShop')
+@section('title', 'Edit Product - QrazCart')
 
 @section('content')
 

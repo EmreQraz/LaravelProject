@@ -1,6 +1,6 @@
-# LaravelShop - Advanced Web Programming Final Project
+# QrazCart - Advanced Web Programming Final Project
 
-LaravelShop is a Laravel-based e-commerce web application developed for the Advanced Web Programming course.
+QrazCart is a Laravel-based e-commerce web application developed for the Advanced Web Programming course.
 
 ## Project Description
 

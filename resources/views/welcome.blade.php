@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LaravelShop - E-Commerce</title>
+    <title>QrazCart - E-Commerce</title>
 
     <style>
         * {
@@ -164,7 +164,7 @@
 <body>
 
 <nav class="navbar">
-    <h1>LaravelShop</h1>
+    <h1>QrazCart</h1>
     <div>
         <a href="#">Dashboard</a>
         <a href="#">Products</a>
@@ -174,7 +174,7 @@
 </nav>
 
 <section class="hero">
-    <h2>Welcome to LaravelShop</h2>
+    <h2>Welcome to QrazCart</h2>
     <p>Modern Laravel based e-commerce project for Advanced Web Programming course.</p>
     <a href="#" class="btn">View Products</a>
 </section>
@@ -227,7 +227,7 @@
 </section>
 
 <footer class="footer">
-    <p>© 2026 LaravelShop | Advanced Web Programming Final Project</p>
+    <p>© 2026 QrazCart | Advanced Web Programming Final Project</p>
 </footer>
 
 </body>

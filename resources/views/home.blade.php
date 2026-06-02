@@ -1,13 +1,26 @@
 @extends('layouts.shop')
 
-@section('title', 'Home - LaravelShop')
+@section('title', 'Home - QrazCart')
 
 @section('content')
 
     <section class="hero">
-        <h2>Welcome to LaravelShop</h2>
-        <p>Modern Laravel based e-commerce project for Advanced Web Programming course.</p>
-        <a href="/products" class="btn">View Products</a>
+        <div>
+            <h2>Discover Smart Shopping with QrazCart</h2>
+            <p>
+                QrazCart is a modern Laravel-based e-commerce platform with product listing,
+                user authentication, role-based admin access, and product management features.
+            </p>
+
+            <a href="/products" class="btn">Shop Now</a>
+            <a href="/login" class="btn btn-secondary">Login</a>
+        </div>
+
+        <div class="hero-card">
+            <div class="icon">🛍️</div>
+            <h3>Fast. Simple. Secure.</h3>
+            <p>Browse products, manage your account, and experience a clean shopping interface.</p>
+        </div>
     </section>
 
     <section class="section">
@@ -31,10 +44,13 @@
                     <div class="product-image">{{ $product->icon }}</div>
 
                     <div class="product-info">
+                        <span class="badge">{{ $product->category->name }}</span>
                         <h3>{{ $product->name }}</h3>
                         <p>{{ $product->description }}</p>
                         <div class="price">${{ $product->price }}</div>
-                        <a href="/products/{{ $product->id }}" class="btn">Details</a>
+                        <p><strong>Stock:</strong> {{ $product->stock }}</p>
+                        <br>
+                        <a href="/products/{{ $product->id }}" class="btn">View Details</a>
                     </div>
                 </div>
             @endforeach
