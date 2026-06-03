@@ -40,6 +40,20 @@ Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.
 Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+Route::post('/contact', function () {
+    request()->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'message' => 'required|string|max:1000',
+    ]);
+
+    return redirect('/contact')->with('success', 'Your message has been received successfully.');
+})->name('contact.submit');
+
 Route::get('/admin', function () {
     $products = Product::with('category')->get();
     $categories = Category::all();
