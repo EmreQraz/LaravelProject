@@ -296,7 +296,7 @@ For simplicity, reviews are not stored in the database.
 Clone the repository:
 
 ```bash
-git clone https://github.com/EmreOraz/LaravelProject.git
+git clone https://github.com/EmreQraz/LaravelProject.git
 ```
 
 Go to the project folder:
@@ -358,7 +358,7 @@ http://127.0.0.1:8000
 ## GitHub Repository
 
 ```txt
-https://github.com/EmreOraz/LaravelProject
+https://github.com/EmreQraz/LaravelProject
 ```
 
 ---
