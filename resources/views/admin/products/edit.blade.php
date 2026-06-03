@@ -43,6 +43,11 @@
             </p>
 
             <p>
+                <label>Image Path</label><br>
+                <input type="text" name="image" value="{{ $product->image }}" placeholder="Example: images/products/laptop.jpg" style="width: 100%; padding: 10px; margin: 8px 0 15px;">
+            </p>
+
+            <p>
                 <label>Stock</label><br>
                 <input type="number" name="stock" value="{{ $product->stock }}" required style="width: 100%; padding: 10px; margin: 8px 0 15px;">
             </p>

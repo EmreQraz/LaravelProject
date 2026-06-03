@@ -24,7 +24,7 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Icon</th>
+                <th>Image</th>
                 <th>Product</th>
                 <th>Category</th>
                 <th>Price</th>
@@ -37,7 +37,13 @@
             @foreach($products as $product)
                 <tr>
                     <td>{{ $product->id }}</td>
-                    <td>{{ $product->icon }}</td>
+                    <td>
+                        @if($product->image)
+                            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" style="width: 55px; height: 55px; object-fit: cover; border-radius: 8px;">
+                        @else
+                            {{ $product->icon }}
+                        @endif
+                    </td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->category->name }}</td>
                     <td>${{ $product->price }}</td>
