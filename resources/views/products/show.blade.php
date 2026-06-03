@@ -37,4 +37,41 @@
         <a href="/products" class="btn">Back to Products</a>
     </div>
 
+    <div class="detail-box" style="text-align: left;">
+        <h2 style="text-align: center;">Customer Reviews</h2>
+        <p style="text-align: center; margin-bottom: 25px;">
+            See what customers think about this product.
+        </p>
+
+        <div style="margin-bottom: 20px; padding: 20px; border: 1px solid #e5e7eb; border-radius: 16px; background: #f8fafc;">
+            <h3>⭐ ⭐ ⭐ ⭐ ⭐</h3>
+            <p style="margin-top: 10px;">
+                Great product quality and fast delivery. I am very satisfied with this purchase.
+            </p>
+            <p style="margin-top: 10px; color: #64748b;">
+                - Customer Review
+            </p>
+        </div>
+
+        <div style="margin-bottom: 20px; padding: 20px; border: 1px solid #e5e7eb; border-radius: 16px; background: #f8fafc;">
+            <h3>⭐ ⭐ ⭐ ⭐</h3>
+            <p style="margin-top: 10px;">
+                The product works well and the price is reasonable. I would recommend it.
+            </p>
+            <p style="margin-top: 10px; color: #64748b;">
+                - Verified User
+            </p>
+        </div>
+
+        <div style="padding: 20px; border: 1px solid #e5e7eb; border-radius: 16px; background: #f8fafc;">
+            <h3>⭐ ⭐ ⭐ ⭐ ⭐</h3>
+            <p style="margin-top: 10px;">
+                Clean design, useful features, and smooth shopping experience.
+            </p>
+            <p style="margin-top: 10px; color: #64748b;">
+                - QrazCart Customer
+            </p>
+        </div>
+    </div>
+
 @endsection
