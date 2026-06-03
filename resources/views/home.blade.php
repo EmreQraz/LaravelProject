@@ -22,9 +22,25 @@
         </div>
 
         <div class="hero-card">
-            <div class="icon">🛍️</div>
-            <h3>Fast. Simple. Secure.</h3>
-            <p>Browse products, manage your account, and experience a clean shopping interface.</p>
+
+            <h3>Why QrazCart?</h3>
+
+            <div style="display: grid; gap: 12px; margin-top: 18px;">
+                <div style="background: rgba(255,255,255,0.12); padding: 14px; border-radius: 14px;">
+                    <strong>🔐 Secure Shopping</strong>
+                    <p style="margin: 6px 0 0; font-size: 14px;">Login, cart and checkout flow.</p>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.12); padding: 14px; border-radius: 14px;">
+                    <strong>🛒 Smart Cart</strong>
+                    <p style="margin: 6px 0 0; font-size: 14px;">Add products and complete orders.</p>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.12); padding: 14px; border-radius: 14px;">
+                    <strong>⚙️ Admin Panel</strong>
+                    <p style="margin: 6px 0 0; font-size: 14px;">Manage products and orders easily.</p>
+                </div>
+            </div>
         </div>
     </section>
 

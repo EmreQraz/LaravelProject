@@ -77,7 +77,7 @@
         }
 
         .hero {
-            padding: 90px 70px;
+            padding: 65px 70px;
             background:
                 linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(124, 58, 237, 0.82)),
                 radial-gradient(circle at top right, rgba(245, 158, 11, 0.45), transparent 35%);
@@ -89,13 +89,13 @@
         }
 
         .hero h2 {
-            font-size: 52px;
+            font-size: 44px;
             line-height: 1.1;
             margin-bottom: 20px;
         }
 
         .hero p {
-            font-size: 19px;
+            font-size: 17px;
             color: #e2e8f0;
             margin-bottom: 30px;
             max-width: 720px;
@@ -104,16 +104,13 @@
         .hero-card {
             background: rgba(255, 255, 255, 0.12);
             border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 24px;
-            padding: 35px;
+            border-radius: 22px;
+            padding: 28px;
             text-align: center;
             backdrop-filter: blur(8px);
             box-shadow: 0 18px 35px rgba(0, 0, 0, 0.22);
-        }
-
-        .hero-card .icon {
-            font-size: 80px;
-            margin-bottom: 15px;
+            max-width: 420px;
+            margin-left: auto;
         }
 
         .hero-card h3 {
@@ -607,7 +604,7 @@
 
             .hero {
                 grid-template-columns: 1fr;
-                padding: 60px 28px;
+                padding: 45px 25px;
                 text-align: center;
             }
 
