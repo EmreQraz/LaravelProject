@@ -965,6 +965,167 @@
             box-shadow: 0 -18px 45px rgba(15, 23, 42, 0.12);
         }
 
+        .danger-box {
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            box-shadow: 0 8px 18px rgba(220, 38, 38, 0.28);
+        }
+
+        /* Compact layout scale */
+        .navbar {
+            padding: 8px 42px;
+        }
+
+        .navbar h1 {
+            font-size: 18px;
+        }
+
+        .nav-links {
+            gap: 5px;
+        }
+
+        .nav-link,
+        .nav-logout-btn {
+            padding: 6px 8px;
+            font-size: 13px;
+        }
+
+        .cart-badge {
+            padding: 2px 7px;
+            font-size: 11px;
+        }
+
+        .hero {
+            padding: 30px 42px;
+            gap: 28px;
+        }
+
+        .hero h2 {
+            font-size: 28px;
+            margin-bottom: 14px;
+        }
+
+        .hero p {
+            font-size: 13.5px;
+            margin-bottom: 20px;
+        }
+
+        .hero-card {
+            padding: 18px;
+            max-width: 330px;
+        }
+
+        .hero-card h3 {
+            font-size: 19px;
+        }
+
+        .section {
+            padding: 26px 42px;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .categories {
+            gap: 16px;
+        }
+
+        .category-card {
+            padding: 18px;
+        }
+
+        .products {
+            gap: 18px;
+        }
+
+        .product-image {
+            height: 130px;
+        }
+
+        .product-info {
+            padding: 12px;
+            min-height: 190px;
+        }
+
+        .product-info h3 {
+            font-size: 16px;
+        }
+
+        .product-info p {
+            font-size: 13px;
+        }
+
+        .badge {
+            font-size: 11.5px;
+            padding: 4px 8px;
+        }
+
+        .price {
+            font-size: 16px;
+        }
+
+        .stock-text {
+            font-size: 12px;
+        }
+
+        .btn {
+            padding: 7px 12px;
+            font-size: 13px;
+            border-radius: 8px;
+        }
+
+        .admin-box {
+            margin: 30px auto;
+            padding: 24px;
+        }
+
+        .detail-box {
+            margin: 30px auto;
+            padding: 24px;
+        }
+
+        .stat-card,
+        .info-card,
+        .about-section,
+        .order-info-card,
+        .faq-item {
+            padding: 18px;
+        }
+
+        .stat-card h3 {
+            font-size: 22px;
+        }
+
+        table th,
+        table td {
+            padding: 9px;
+            font-size: 13px;
+        }
+
+        .form-control,
+        .admin-box input,
+        .admin-box select,
+        .admin-box textarea {
+            padding: 10px 12px;
+            font-size: 13px;
+        }
+
+        .footer {
+            padding: 22px;
+        }
+
         @media (max-width: 900px) {
             .form-row {
                 grid-template-columns: 1fr;
