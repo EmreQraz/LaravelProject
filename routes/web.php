@@ -16,16 +16,23 @@ Route::get('/', function () {
 
 Route::get('/products', function () {
     $categoryId = request('category');
+    $search = request('search');
 
     $products = Product::with('category')
         ->when($categoryId, function ($query) use ($categoryId) {
             return $query->where('category_id', $categoryId);
         })
+        ->when($search, function ($query) use ($search) {
+            return $query->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('description', 'like', '%' . $search . '%');
+            });
+        })
         ->get();
 
     $selectedCategory = $categoryId ? Category::find($categoryId) : null;
 
-    return view('products.index', compact('products', 'selectedCategory'));
+    return view('products.index', compact('products', 'selectedCategory', 'search'));
 });
 
 Route::get('/products/{id}', function ($id) {

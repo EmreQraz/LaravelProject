@@ -11,8 +11,27 @@
             <h2>All Products</h2>
         @endif
 
-        <div class="products">
-            @foreach($products as $product)
+            <form action="/products" method="GET" style="max-width: 700px; margin: 0 auto 35px; display: flex; gap: 10px;">
+                @if(request('category'))
+                    <input type="hidden" name="category" value="{{ request('category') }}">
+                @endif
+
+                <input
+                    type="text"
+                    name="search"
+                    value="{{ $search ?? '' }}"
+                    placeholder="Search products..."
+                    style="flex: 1; padding: 13px; border: 1px solid #e5e7eb; border-radius: 10px;"
+                >
+
+                <button type="submit" class="btn">Search</button>
+
+                <a href="/products" class="btn btn-secondary">Reset</a>
+            </form>
+
+            @if($products->count() > 0)
+                <div class="products">
+                    @foreach($products as $product)
                 <div class="product-card">
                     <div class="product-image">
                         @if($product->image)
@@ -39,8 +58,15 @@
                         </form>
                     </div>
                 </div>
-            @endforeach
-        </div>
+                    @endforeach
+                </div>
+            @else
+                <div style="text-align: center; background: white; padding: 35px; border-radius: 18px; border: 1px solid #e5e7eb;">
+                    <h3>No products found.</h3>
+                    <p style="margin: 12px 0;">Try searching with another keyword.</p>
+                    <a href="/products" class="btn">View All Products</a>
+                </div>
+            @endif
     </section>
 
 @endsection
