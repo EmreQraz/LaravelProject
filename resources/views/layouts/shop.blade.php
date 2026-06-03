@@ -765,6 +765,128 @@
             font-weight: 800;
         }
 
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes softFade {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .hero,
+        .section,
+        .admin-box,
+        .detail-box {
+            animation: fadeUp 0.55s ease both;
+        }
+
+        .product-card,
+        .category-card,
+        .stat-card,
+        .faq-item,
+        .info-card,
+        .about-section,
+        .order-info-card {
+            animation: fadeUp 0.5s ease both;
+        }
+
+        .product-card:nth-child(1),
+        .category-card:nth-child(1),
+        .stat-card:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .product-card:nth-child(2),
+        .category-card:nth-child(2),
+        .stat-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .product-card:nth-child(3),
+        .category-card:nth-child(3),
+        .stat-card:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .product-card:nth-child(4),
+        .category-card:nth-child(4),
+        .stat-card:nth-child(4) {
+            animation-delay: 0.2s;
+        }
+
+        table {
+            animation: softFade 0.45s ease both;
+        }
+
+        .btn,
+        .nav-link,
+        .social-link {
+            will-change: transform;
+        }
+
+        @keyframes floatSoft {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-6px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 0 rgba(124, 58, 237, 0);
+            }
+            50% {
+                box-shadow: 0 0 22px rgba(124, 58, 237, 0.28);
+            }
+            100% {
+                box-shadow: 0 0 0 rgba(124, 58, 237, 0);
+            }
+        }
+
+        .hero-card {
+            animation: fadeUp 0.65s ease both, floatSoft 4s ease-in-out infinite;
+        }
+
+        .stat-card:hover,
+        .info-card:hover,
+        .about-section:hover,
+        .order-info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 26px rgba(15, 23, 42, 0.1);
+        }
+
+        .stat-card,
+        .info-card,
+        .about-section,
+        .order-info-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cart-summary {
+            animation: pulseGlow 1.8s ease-in-out 1;
+        }
+
+        .status-badge {
+            animation: softFade 0.4s ease both;
+        }
+
         @media (max-width: 900px) {
             .form-row {
                 grid-template-columns: 1fr;
