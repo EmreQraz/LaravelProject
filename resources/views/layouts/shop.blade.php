@@ -1041,7 +1041,11 @@
         <a href="/faq" class="nav-link">FAQ</a>
         <a href="/about" class="nav-link">About</a>
         <a href="/contact" class="nav-link">Contact</a>
-        <a href="/admin" class="nav-link">Admin</a>
+        @auth
+            @if(auth()->user()->hasRole('admin'))
+                <a href="/admin" class="nav-link">Admin</a>
+            @endif
+        @endauth
 
         @auth
             <a href="/dashboard" class="nav-link">Dashboard</a>
