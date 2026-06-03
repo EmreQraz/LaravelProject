@@ -56,12 +56,26 @@
 
                     <div class="product-info">
                         <span class="badge">{{ $product->category->name }}</span>
+
                         <h3>{{ $product->name }}</h3>
+
                         <p>{{ $product->description }}</p>
-                        <div class="price">${{ $product->price }}</div>
-                        <p><strong>Stock:</strong> {{ $product->stock }}</p>
-                        <br>
-                        <a href="/products/{{ $product->id }}" class="btn">View Details</a>
+
+                        <div class="product-meta">
+                            <div class="price">${{ $product->price }}</div>
+                            <div class="stock-text">Stock: {{ $product->stock }}</div>
+                        </div>
+
+                        <div class="product-actions">
+                            <a href="/products/{{ $product->id }}" class="btn">View Details</a>
+
+                            <form action="{{ route('cart.add', $product) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-secondary">
+                                    Add to Cart
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             @endforeach

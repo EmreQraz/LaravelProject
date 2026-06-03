@@ -401,6 +401,49 @@
             margin-top: 45px;
         }
 
+        .product-card {
+            position: relative;
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            min-height: 245px;
+        }
+
+        .product-info p {
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .product-actions {
+            margin-top: auto;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 12px 0;
+        }
+
+        .stock-text {
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.06);
+        }
+
+        .product-image img {
+            transition: transform 0.3s ease;
+        }
+
         @media (max-width: 900px) {
             .navbar {
                 padding: 16px 25px;
