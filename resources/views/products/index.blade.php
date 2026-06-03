@@ -24,6 +24,13 @@
                         <p><strong>Stock:</strong> {{ $product->stock }}</p>
                         <br>
                         <a href="/products/{{ $product->id }}" class="btn">View Details</a>
+
+                        <form action="{{ route('cart.add', $product) }}" method="POST" style="display:inline;">
+                            @csrf
+                            <button type="submit" class="btn btn-secondary">
+                                Add to Cart
+                            </button>
+                        </form>
                     </div>
                 </div>
             @endforeach
