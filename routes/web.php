@@ -54,6 +54,10 @@ Route::post('/contact', function () {
     return redirect('/contact')->with('success', 'Your message has been received successfully.');
 })->name('contact.submit');
 
+Route::get('/faq', function () {
+    return view('faq');
+})->name('faq');
+
 Route::get('/admin', function () {
     $products = Product::with('category')->get();
     $categories = Category::all();
