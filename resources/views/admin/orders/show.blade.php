@@ -9,7 +9,12 @@
 
         <p><strong>Customer:</strong> {{ $order->customer_name }}</p>
         <p><strong>Email:</strong> {{ $order->customer_email }}</p>
-        <p><strong>Status:</strong> {{ ucfirst($order->status) }}</p>
+        <p>
+            <strong>Status:</strong>
+            <span class="status-badge status-completed">
+        {{ ucfirst($order->status) }}
+    </span>
+        </p>
         <p><strong>Order Date:</strong> {{ $order->created_at->format('d.m.Y H:i') }}</p>
         <p><strong>Total Price:</strong> ${{ number_format($order->total_price, 2) }}</p>
 

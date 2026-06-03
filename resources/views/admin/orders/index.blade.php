@@ -33,7 +33,11 @@
                         <td>{{ $order->customer_name }}</td>
                         <td>{{ $order->customer_email }}</td>
                         <td>${{ number_format($order->total_price, 2) }}</td>
-                        <td>{{ ucfirst($order->status) }}</td>
+                        <td>
+    <span class="status-badge status-completed">
+        {{ ucfirst($order->status) }}
+    </span>
+                        </td>
                         <td>{{ $order->created_at->format('d.m.Y H:i') }}</td>
                         <td>
                             <a href="{{ route('admin.orders.show', $order) }}" class="btn">

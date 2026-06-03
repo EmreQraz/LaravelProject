@@ -134,6 +134,81 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
+        .form-control,
+        .admin-box input,
+        .admin-box select,
+        .admin-box textarea {
+            width: 100%;
+            padding: 13px 15px;
+            margin: 8px 0 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background-color: #ffffff;
+            color: var(--dark);
+            font-size: 15px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-control:focus,
+        .admin-box input:focus,
+        .admin-box select:focus,
+        .admin-box textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
+        }
+
+        .admin-box label {
+            font-weight: 700;
+            color: var(--dark-soft);
+        }
+
+        .success-message {
+            margin-top: 20px;
+            padding: 14px 16px;
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+            border-radius: 12px;
+            font-weight: 700;
+        }
+
+        .error-message {
+            margin-top: 20px;
+            padding: 14px 16px;
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+            border-radius: 12px;
+            font-weight: 700;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .status-completed {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .empty-state {
+            margin-top: 30px;
+            text-align: center;
+            background: #f8fafc;
+            padding: 35px;
+            border-radius: 18px;
+            border: 1px solid var(--border);
+        }
+
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 18px rgba(124, 58, 237, 0.35);
