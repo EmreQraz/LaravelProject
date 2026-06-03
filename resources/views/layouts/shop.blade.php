@@ -1006,8 +1006,9 @@
         }
 
         .hero {
-            padding: 30px 42px;
-            gap: 28px;
+            padding: 22px 42px;
+            gap: 24px;
+            min-height: 210px;
         }
 
         .hero h2 {
@@ -1021,12 +1022,12 @@
         }
 
         .hero-card {
-            padding: 18px;
-            max-width: 330px;
+            padding: 14px;
+            max-width: 300px;
         }
 
         .hero-card h3 {
-            font-size: 19px;
+            font-size: 17px;
         }
 
         .section {
@@ -1124,6 +1125,34 @@
 
         .footer {
             padding: 22px;
+        }
+
+        .featured-slider {
+            position: relative;
+            overflow: hidden;
+            min-height: 330px;
+        }
+
+        .featured-track {
+            display: flex;
+            transition: transform 0.65s ease-in-out;
+            width: 100%;
+        }
+
+        .featured-slide {
+            min-width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            padding: 0 2px;
+        }
+
+        .featured-slide .product-image {
+            height: 145px;
+        }
+
+        .featured-slide .product-info {
+            min-height: 190px;
         }
 
         @media (max-width: 900px) {

@@ -25,20 +25,20 @@
 
             <h3>Why QrazCart?</h3>
 
-            <div style="display: grid; gap: 12px; margin-top: 18px;">
-                <div style="background: rgba(255,255,255,0.12); padding: 14px; border-radius: 14px;">
-                    <strong>🔐 Secure Shopping</strong>
-                    <p style="margin: 6px 0 0; font-size: 14px;">Login, cart and checkout flow.</p>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px;">
+                <div style="background: rgba(255,255,255,0.12); padding: 8px; border-radius: 14px;">
+                    <strong>🔐 Secure</strong>
+                    <p style="margin: 6px 0 0; font-size: 12px;">Safe checkout.</p>
                 </div>
 
-                <div style="background: rgba(255,255,255,0.12); padding: 14px; border-radius: 14px;">
-                    <strong>🛒 Smart Cart</strong>
-                    <p style="margin: 6px 0 0; font-size: 14px;">Add products and complete orders.</p>
+                <div style="background: rgba(255,255,255,0.12); padding: 8px; border-radius: 14px;">
+                    <strong>🛒 Cart</strong>
+                    <p style="margin: 6px 0 0; font-size: 12px;">Easy orders.</p>
                 </div>
 
-                <div style="background: rgba(255,255,255,0.12); padding: 14px; border-radius: 14px;">
-                    <strong>⚙️ Admin Panel</strong>
-                    <p style="margin: 6px 0 0; font-size: 14px;">Manage products and orders easily.</p>
+                <div style="background: rgba(255,255,255,0.12); padding: 8px; border-radius: 14px;">
+                    <strong>⚙️ Admin</strong>
+                    <p style="margin: 6px 0 0; font-size: 12px;">Full control.</p>
                 </div>
             </div>
         </div>
@@ -59,43 +59,64 @@
     <section class="section">
         <h2>Featured Products</h2>
 
-        <div class="products">
-            @foreach($products as $product)
-                <div class="product-card">
-                    <div class="product-image">
-                        @if($product->image)
-                            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
-                        @else
-                            <span class="fallback-icon">{{ $product->icon }}</span>
-                        @endif
+        <div class="featured-slider">
+            <div class="featured-track">
+                @foreach($products->chunk(2) as $index => $productGroup)
+                    <div class="featured-slide">
+                        @foreach($productGroup as $product)
+                            <div class="product-card">
+                                <div class="product-image">
+                                    @if($product->image)
+                                        <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
+                                    @else
+                                        <span class="fallback-icon">{{ $product->icon }}</span>
+                                    @endif
+                                </div>
+
+                                <div class="product-info">
+                                    <span class="badge">{{ $product->category->name }}</span>
+
+                                    <h3>{{ $product->name }}</h3>
+
+                                    <p>{{ $product->description }}</p>
+
+                                    <div class="product-meta">
+                                        <div class="price">${{ $product->price }}</div>
+                                        <div class="stock-text">Stock: {{ $product->stock }}</div>
+                                    </div>
+
+                                    <div class="product-actions">
+                                        <a href="/products/{{ $product->id }}" class="btn">View Details</a>
+
+                                        <form action="{{ route('cart.add', $product) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-secondary">
+                                                Add to Cart
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-
-                    <div class="product-info">
-                        <span class="badge">{{ $product->category->name }}</span>
-
-                        <h3>{{ $product->name }}</h3>
-
-                        <p>{{ $product->description }}</p>
-
-                        <div class="product-meta">
-                            <div class="price">${{ $product->price }}</div>
-                            <div class="stock-text">Stock: {{ $product->stock }}</div>
-                        </div>
-
-                        <div class="product-actions">
-                            <a href="/products/{{ $product->id }}" class="btn">View Details</a>
-
-                            <form action="{{ route('cart.add', $product) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-secondary">
-                                    Add to Cart
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const track = document.querySelector('.featured-track');
+            const slides = document.querySelectorAll('.featured-slide');
+            let currentSlide = 0;
+
+            if (track && slides.length > 1) {
+                setInterval(function () {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+                }, 3500);
+            }
+        });
+    </script>
 
 @endsection

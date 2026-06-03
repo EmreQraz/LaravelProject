@@ -11,7 +11,7 @@ use App\Models\Order;
 
 Route::get('/', function () {
     $categories = Category::all();
-    $products = Product::with('category')->take(3)->get();
+    $products = Product::with('category')->take(8)->get();
 
     return view('home', compact('categories', 'products'));
 });
