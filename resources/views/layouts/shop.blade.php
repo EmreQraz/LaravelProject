@@ -495,11 +495,59 @@
             margin-bottom: 22px;
         }
 
+        .order-info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin: 25px 0;
+        }
+
+        .order-info-card {
+            background: linear-gradient(135deg, #f8fafc, #ede9fe);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .order-info-card p {
+            color: var(--muted);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .order-info-card h3 {
+            color: var(--dark);
+            font-size: 20px;
+        }
+
+        .order-total-box {
+            margin-top: 25px;
+            background: linear-gradient(135deg, var(--dark), var(--dark-soft));
+            color: var(--white);
+            padding: 22px;
+            border-radius: 18px;
+            text-align: right;
+        }
+
+        .order-total-box p {
+            color: #cbd5e1;
+            margin-bottom: 8px;
+        }
+
+        .order-total-box h3 {
+            font-size: 28px;
+            color: var(--accent);
+        }
+
         @media (max-width: 900px) {
             .navbar {
                 padding: 16px 25px;
                 flex-direction: column;
                 gap: 15px;
+            }
+
+            .order-info-grid {
+                grid-template-columns: 1fr;
             }
 
             .hero {

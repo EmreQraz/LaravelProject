@@ -6,45 +6,66 @@
 
     <div class="admin-box">
         <h2>Order Details #{{ $order->id }}</h2>
+        <p>Detailed information about this customer order is shown below.</p>
 
-        <p><strong>Customer:</strong> {{ $order->customer_name }}</p>
-        <p><strong>Email:</strong> {{ $order->customer_email }}</p>
-        <p>
-            <strong>Status:</strong>
-            <span class="status-badge status-completed">
-        {{ ucfirst($order->status) }}
-    </span>
-        </p>
-        <p><strong>Order Date:</strong> {{ $order->created_at->format('d.m.Y H:i') }}</p>
-        <p><strong>Total Price:</strong> ${{ number_format($order->total_price, 2) }}</p>
+        <div class="order-info-grid">
+            <div class="order-info-card">
+                <p>Customer</p>
+                <h3>{{ $order->customer_name }}</h3>
+            </div>
 
-        <br>
+            <div class="order-info-card">
+                <p>Email</p>
+                <h3>{{ $order->customer_email }}</h3>
+            </div>
+
+            <div class="order-info-card">
+                <p>Status</p>
+                <h3>
+                <span class="status-badge status-completed">
+                    {{ ucfirst($order->status) }}
+                </span>
+                </h3>
+            </div>
+
+            <div class="order-info-card">
+                <p>Order Date</p>
+                <h3>{{ $order->created_at->format('d.m.Y H:i') }}</h3>
+            </div>
+        </div>
 
         <a href="{{ route('admin.orders.index') }}" class="btn">Back to Orders</a>
 
-        <table>
-            <thead>
-            <tr>
-                <th>Product</th>
-                <th>Product ID</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            @foreach($order->items as $item)
+        <div class="table-wrapper">
+            <table>
+                <thead>
                 <tr>
-                    <td>{{ $item->product_name }}</td>
-                    <td>{{ $item->product_id ?? '-' }}</td>
-                    <td>${{ number_format($item->price, 2) }}</td>
-                    <td>{{ $item->quantity }}</td>
-                    <td>${{ number_format($item->subtotal, 2) }}</td>
+                    <th>Product</th>
+                    <th>Product ID</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+
+                <tbody>
+                @foreach($order->items as $item)
+                    <tr>
+                        <td>{{ $item->product_name }}</td>
+                        <td>{{ $item->product_id ?? '-' }}</td>
+                        <td>${{ number_format($item->price, 2) }}</td>
+                        <td>{{ $item->quantity }}</td>
+                        <td>${{ number_format($item->subtotal, 2) }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <div class="order-total-box">
+            <p>Total Price</p>
+            <h3>${{ number_format($order->total_price, 2) }}</h3>
+        </div>
     </div>
 
 @endsection

@@ -13,7 +13,8 @@
         <a href="/admin" class="btn">Back to Admin Dashboard</a>
 
         @if($orders->count() > 0)
-            <table>
+            <div class="table-wrapper">
+                <table>
                 <thead>
                 <tr>
                     <th>Order ID</th>
@@ -48,6 +49,7 @@
                 @endforeach
                 </tbody>
             </table>
+            </div>
         @else
             <div style="margin-top: 30px; text-align: center; background: #f8fafc; padding: 35px; border-radius: 18px; border: 1px solid #e5e7eb;">
                 <h3>No orders found.</h3>
