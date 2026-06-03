@@ -29,6 +29,7 @@
         </div>
 
         <a href="{{ route('admin.products.index') }}" class="btn">Manage Products</a>
+        <a href="{{ route('admin.orders.index') }}" class="btn btn-secondary">View Orders</a>
 
         <table>
             <thead>
