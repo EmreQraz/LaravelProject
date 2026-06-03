@@ -45,7 +45,13 @@
             @foreach($products as $product)
                 <tr>
                     <td>{{ $product->id }}</td>
-                    <td>{{ $product->icon }} {{ $product->name }}</td>
+                    <td>
+                        @if($product->image)
+                            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" style="width: 45px; height: 45px; object-fit: cover; border-radius: 8px; vertical-align: middle; margin-right: 8px;">
+                        @endif
+
+                        {{ $product->name }}
+                    </td>
                     <td>{{ $product->category->name }}</td>
                     <td>${{ $product->price }}</td>
                     <td>{{ $product->stock }}</td>

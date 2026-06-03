@@ -14,7 +14,13 @@
         <div class="products">
             @foreach($products as $product)
                 <div class="product-card">
-                    <div class="product-image">{{ $product->icon }}</div>
+                    <div class="product-image">
+                        @if($product->image)
+                            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
+                        @else
+                            <span class="fallback-icon">{{ $product->icon }}</span>
+                        @endif
+                    </div>
 
                     <div class="product-info">
                         <span class="badge">{{ $product->category->name }}</span>

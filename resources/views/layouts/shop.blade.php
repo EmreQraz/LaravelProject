@@ -198,11 +198,21 @@
         }
 
         .product-image {
-            height: 190px;
+            height: 220px;
             background: linear-gradient(135deg, #ede9fe, #e0f2fe);
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-image .fallback-icon {
             font-size: 58px;
         }
 
@@ -346,7 +356,8 @@
             .admin-stats {
                 grid-template-columns: 1fr;
             }
-        }    </style>
+        }
+    </style>
 </head>
 <body>
 

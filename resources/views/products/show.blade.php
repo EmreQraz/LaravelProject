@@ -5,7 +5,11 @@
 @section('content')
 
     <div class="detail-box">
-        <div class="detail-icon">{{ $product->icon }}</div>
+        @if($product->image)
+            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" style="width: 100%; max-height: 360px; object-fit: cover; border-radius: 18px; margin-bottom: 25px;">
+        @else
+            <div class="detail-icon">{{ $product->icon }}</div>
+        @endif
 
         <h2>{{ $product->name }}</h2>
 
