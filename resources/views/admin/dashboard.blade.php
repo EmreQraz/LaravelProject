@@ -26,6 +26,11 @@
                 <h3>{{ $products->sum('stock') }}</h3>
                 <p>Total Stock</p>
             </div>
+
+            <div class="stat-card">
+                <h3>{{ $orders->count() }}</h3>
+                <p>Total Orders</p>
+            </div>
         </div>
 
         <a href="{{ route('admin.products.index') }}" class="btn">Manage Products</a>

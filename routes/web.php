@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Models\Order;
 
 Route::get('/', function () {
     $categories = Category::all();
@@ -71,8 +72,9 @@ Route::get('/faq', function () {
 Route::get('/admin', function () {
     $products = Product::with('category')->get();
     $categories = Category::all();
+    $orders = Order::all();
 
-    return view('admin.dashboard', compact('products', 'categories'));
+    return view('admin.dashboard', compact('products', 'categories', 'orders'));
 })->middleware('admin');
 
 Route::middleware('admin')->prefix('admin')->group(function () {
