@@ -35,7 +35,7 @@
         .navbar {
             background: linear-gradient(90deg, var(--dark), var(--dark-soft));
             color: var(--white);
-            padding: 18px 70px;
+            padding: 10px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -46,7 +46,7 @@
         }
 
         .navbar h1 {
-            font-size: 26px;
+            font-size: 20px;
             letter-spacing: 0.5px;
         }
 
@@ -77,10 +77,11 @@
         }
 
         .hero {
-            padding: 65px 70px;
+            padding: 38px 50px;
             background:
-                linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(124, 58, 237, 0.82)),
-                radial-gradient(circle at top right, rgba(245, 158, 11, 0.45), transparent 35%);
+                linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.92)),
+                radial-gradient(circle at top right, rgba(245, 158, 11, 0.42), transparent 34%),
+                radial-gradient(circle at bottom left, rgba(251, 191, 36, 0.22), transparent 32%);
             color: var(--white);
             display: grid;
             grid-template-columns: 1.3fr 0.7fr;
@@ -89,27 +90,29 @@
         }
 
         .hero h2 {
-            font-size: 44px;
+            font-size: 31px;
             line-height: 1.1;
             margin-bottom: 20px;
         }
 
         .hero p {
-            font-size: 17px;
+            font-size: 14px;
             color: #e2e8f0;
             margin-bottom: 30px;
             max-width: 720px;
         }
 
         .hero-card {
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.11);
+            border: 1px solid rgba(245, 158, 11, 0.22);
             border-radius: 22px;
-            padding: 28px;
+            padding: 22px;
             text-align: center;
             backdrop-filter: blur(8px);
-            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.22);
-            max-width: 420px;
+            box-shadow:
+                0 22px 45px rgba(0, 0, 0, 0.24),
+                0 0 35px rgba(245, 158, 11, 0.14);
+            max-width: 360px;
             margin-left: auto;
         }
 
@@ -122,13 +125,14 @@
             display: inline-block;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: var(--white);
-            padding: 12px 24px;
+            padding: 8px 15px;
             border-radius: 10px;
             text-decoration: none;
             font-weight: bold;
             border: none;
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            font-size: 14px;
         }
 
         .form-control,
@@ -217,13 +221,13 @@
         }
 
         .section {
-            padding: 55px 70px;
+            padding: 32px 48px;
         }
 
         .section h2 {
             text-align: center;
-            margin-bottom: 35px;
-            font-size: 34px;
+            margin-bottom: 24px;
+            font-size: 24px;
         }
 
         .categories {
@@ -234,7 +238,7 @@
 
         .category-card {
             background-color: var(--white);
-            padding: 32px;
+            padding: 22px;
             text-align: center;
             border-radius: 18px;
             box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
@@ -253,7 +257,7 @@
         .products {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
+            gap: 22px;
         }
 
         .product-card {
@@ -271,7 +275,7 @@
         }
 
         .product-image {
-            height: 220px;
+            height: 155px;
             background: linear-gradient(135deg, #ede9fe, #e0f2fe);
             display: flex;
             align-items: center;
@@ -290,12 +294,12 @@
         }
 
         .product-info {
-            padding: 22px;
+            padding: 14px;
         }
 
         .product-info h3 {
-            margin-bottom: 10px;
-            font-size: 22px;
+            margin-bottom: 6px;
+            font-size: 17px;
         }
 
         .badge {
@@ -312,15 +316,15 @@
         .price {
             color: var(--success);
             font-weight: bold;
-            font-size: 22px;
+            font-size: 17px;
             margin: 14px 0;
         }
 
         .detail-box {
             max-width: 850px;
-            margin: 55px auto;
+            margin: 42px auto;
             background-color: var(--white);
-            padding: 45px;
+            padding: 32px;
             border-radius: 22px;
             box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
             text-align: center;
@@ -334,9 +338,9 @@
 
         .admin-box {
             max-width: 1050px;
-            margin: 55px auto;
+            margin: 42px auto;
             background-color: var(--white);
-            padding: 42px;
+            padding: 32px;
             border-radius: 22px;
             box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
             border: 1px solid var(--border);
@@ -546,7 +550,7 @@
         .nav-link {
             color: var(--white);
             text-decoration: none;
-            padding: 9px 12px;
+            padding: 7px 10px;
             border-radius: 10px;
             font-weight: 700;
             transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
@@ -885,6 +889,80 @@
 
         .status-badge {
             animation: softFade 0.4s ease both;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(245, 158, 11, 0.10), transparent 32%),
+                radial-gradient(circle at top right, rgba(124, 58, 237, 0.10), transparent 30%),
+                linear-gradient(180deg, #fff7ed 0%, #f8fafc 38%, #f8fafc 100%);
+        }
+
+        .product-card,
+        .category-card,
+        .admin-box,
+        .detail-box,
+        .stat-card,
+        .info-card,
+        .faq-item,
+        .about-section,
+        .order-info-card {
+            box-shadow:
+                0 14px 35px rgba(15, 23, 42, 0.08),
+                0 4px 12px rgba(245, 158, 11, 0.06);
+        }
+
+        .product-card:hover,
+        .category-card:hover,
+        .stat-card:hover,
+        .info-card:hover,
+        .about-section:hover,
+        .order-info-card:hover {
+            box-shadow:
+                0 20px 45px rgba(15, 23, 42, 0.14),
+                0 8px 22px rgba(245, 158, 11, 0.12);
+        }
+
+        .product-image {
+            position: relative;
+        }
+
+        .product-image::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.32), transparent 42%),
+                radial-gradient(circle at top right, rgba(245, 158, 11, 0.25), transparent 35%);
+            pointer-events: none;
+        }
+
+        .product-card:hover .product-image::after {
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.42), transparent 45%),
+                radial-gradient(circle at top right, rgba(245, 158, 11, 0.35), transparent 38%);
+        }
+
+        .hero {
+            box-shadow: inset 0 -40px 80px rgba(255, 255, 255, 0.06);
+        }
+
+        .hero-card {
+            box-shadow:
+                0 22px 45px rgba(0, 0, 0, 0.24),
+                0 0 35px rgba(245, 158, 11, 0.12);
+        }
+
+        .btn {
+            box-shadow: 0 8px 18px rgba(124, 58, 237, 0.18);
+        }
+
+        .btn-secondary {
+            box-shadow: 0 8px 18px rgba(245, 158, 11, 0.20);
+        }
+
+        .footer {
+            box-shadow: 0 -18px 45px rgba(15, 23, 42, 0.12);
         }
 
         @media (max-width: 900px) {
