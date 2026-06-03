@@ -5,7 +5,11 @@
 @section('content')
 
     <section class="section">
-        <h2>All Products</h2>
+        @if($selectedCategory)
+            <h2>{{ $selectedCategory->name }} Products</h2>
+        @else
+            <h2>All Products</h2>
+        @endif
 
         <div class="products">
             @foreach($products as $product)

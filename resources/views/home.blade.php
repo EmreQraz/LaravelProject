@@ -33,9 +33,9 @@
 
         <div class="categories">
             @foreach($categories as $category)
-                <div class="category-card">
+                <a href="/products?category={{ $category->id }}" class="category-card">
                     {{ $category->name }}
-                </div>
+                </a>
             @endforeach
         </div>
     </section>

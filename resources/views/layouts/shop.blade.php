@@ -168,6 +168,8 @@
             font-weight: bold;
             border: 1px solid var(--border);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            color: var(--dark);
         }
 
         .category-card:hover {

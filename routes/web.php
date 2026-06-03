@@ -14,9 +14,17 @@ Route::get('/', function () {
 });
 
 Route::get('/products', function () {
-    $products = Product::with('category')->get();
+    $categoryId = request('category');
 
-    return view('products.index', compact('products'));
+    $products = Product::with('category')
+        ->when($categoryId, function ($query) use ($categoryId) {
+            return $query->where('category_id', $categoryId);
+        })
+        ->get();
+
+    $selectedCategory = $categoryId ? Category::find($categoryId) : null;
+
+    return view('products.index', compact('products', 'selectedCategory'));
 });
 
 Route::get('/products/{id}', function ($id) {
