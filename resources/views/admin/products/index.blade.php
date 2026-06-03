@@ -1,69 +1,76 @@
 @extends('layouts.shop')
 
-@section('title', 'Manage Products - QrazCart')
+@section('title', 'Add Product - QrazCart')
 
 @section('content')
 
-    <div class="admin-box">
-        <h2>Manage Products</h2>
+    <div class="admin-box form-card">
+        <div class="admin-header">
+            <div>
+                <h2>Add New Product</h2>
+                <p>Create a new product for QrazCart.</p>
+            </div>
 
-        <p>Admin can create, update and delete products from this page.</p>
+            <div class="admin-actions">
+                <a href="{{ route('admin.products.index') }}" class="btn btn-secondary">Back to Products</a>
+            </div>
+        </div>
 
-        <br>
+        <form action="{{ route('admin.products.store') }}" method="POST">
+            @csrf
 
-        <a href="{{ route('admin.products.create') }}" class="btn">Add New Product</a>
-        <a href="/admin" class="btn">Back to Admin Dashboard</a>
-
-        @if(session('success'))
-            <p style="margin-top: 20px; color: green; font-weight: bold;">
-                {{ session('success') }}
+            <p>
+                <label>Category</label>
+                <select name="category_id" required>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
             </p>
-        @endif
 
-        <table>
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Image</th>
-                <th>Product</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
+            <p>
+                <label>Product Name</label>
+                <input type="text" name="name" required>
+            </p>
 
-            <tbody>
-            @foreach($products as $product)
-                <tr>
-                    <td>{{ $product->id }}</td>
-                    <td>
-                        @if($product->image)
-                            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" style="width: 55px; height: 55px; object-fit: cover; border-radius: 8px;">
-                        @else
-                            {{ $product->icon }}
-                        @endif
-                    </td>
-                    <td>{{ $product->name }}</td>
-                    <td>{{ $product->category->name }}</td>
-                    <td>${{ $product->price }}</td>
-                    <td>{{ $product->stock }}</td>
-                    <td>
-                        <a href="{{ route('admin.products.edit', $product) }}" class="btn">Edit</a>
+            <p>
+                <label>Description</label>
+                <textarea name="description" required style="height: 120px;"></textarea>
+            </p>
 
-                        <form action="{{ route('admin.products.destroy', $product) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
+            <div class="form-row">
+                <p>
+                    <label>Price</label>
+                    <input type="number" name="price" step="0.01" required>
+                </p>
 
-                            <button type="submit" class="btn" onclick="return confirm('Are you sure you want to delete this product?')">
-                                Delete
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+                <p>
+                    <label>Stock</label>
+                    <input type="number" name="stock" required>
+                </p>
+            </div>
+
+            <div class="form-row">
+                <p>
+                    <label>Icon</label>
+                    <input type="text" name="icon" placeholder="Example: 💻">
+                <div class="form-help">Optional emoji icon for fallback display.</div>
+                </p>
+
+                <p>
+                    <label>Image Path</label>
+                    <input type="text" name="image" placeholder="Example: images/products/laptop.jpg">
+                <div class="form-help">Use an image path from public/images/products.</div>
+                </p>
+            </div>
+
+            <div class="admin-actions">
+                <button type="submit" class="btn">Save Product</button>
+                <a href="{{ route('admin.products.index') }}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
     </div>
 
 @endsection

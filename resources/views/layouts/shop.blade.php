@@ -715,6 +715,62 @@
             color: var(--dark);
         }
 
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .admin-header p {
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .product-thumb {
+            width: 58px;
+            height: 58px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .form-card {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .form-help {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: -8px;
+            margin-bottom: 14px;
+        }
+
+        .admin-product-name {
+            font-weight: 800;
+        }
+
+        @media (max-width: 900px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 900px) {
             .navbar {
                 padding: 16px 25px;
