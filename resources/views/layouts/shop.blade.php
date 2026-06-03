@@ -357,6 +357,10 @@
             .admin-stats {
                 grid-template-columns: 1fr;
             }
+
+            .detail-box > div {
+                grid-template-columns: 1fr !important;
+            }
         }
     </style>
 </head>

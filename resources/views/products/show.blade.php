@@ -4,37 +4,58 @@
 
 @section('content')
 
-    <div class="detail-box">
-        @if($product->image)
-            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" style="width: 100%; max-height: 360px; object-fit: cover; border-radius: 18px; margin-bottom: 25px;">
-        @else
-            <div class="detail-icon">{{ $product->icon }}</div>
-        @endif
+    <div class="detail-box" style="text-align: left;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 35px; align-items: center;">
+            <div>
+                @if($product->image)
+                    <img src="{{ asset($product->image) }}" alt="{{ $product->name }}"
+                         style="width: 100%; height: 420px; object-fit: cover; border-radius: 22px;">
+                @else
+                    <div class="detail-icon" style="text-align: center;">{{ $product->icon }}</div>
+                @endif
+            </div>
 
-        <h2>{{ $product->name }}</h2>
+            <div>
+                <span class="badge">{{ $product->category->name }}</span>
 
-        <p><strong>Category:</strong> {{ $product->category->name }}</p>
+                <h2 style="font-size: 36px; margin: 15px 0;">
+                    {{ $product->name }}
+                </h2>
 
-        <p style="margin: 20px 0;">
-            {{ $product->description }}
-        </p>
+                <p style="color: #64748b; line-height: 1.7; margin-bottom: 20px;">
+                    {{ $product->description }}
+                </p>
 
-        <div class="price">${{ $product->price }}</div>
+                <div class="price" style="font-size: 30px;">
+                    ${{ $product->price }}
+                </div>
 
-        <p><strong>Stock:</strong> {{ $product->stock }}</p>
+                <p style="margin-bottom: 18px;">
+                    <strong>Stock:</strong> {{ $product->stock }}
+                </p>
 
-        <br>
+                @if($product->stock > 0)
+                    <p style="color: #16a34a; font-weight: bold; margin-bottom: 20px;">
+                        In Stock
+                    </p>
+                @else
+                    <p style="color: #dc2626; font-weight: bold; margin-bottom: 20px;">
+                        Out of Stock
+                    </p>
+                @endif
 
-        <form action="{{ route('cart.add', $product) }}" method="POST" style="display:inline;">
-            @csrf
-            <button type="submit" class="btn">
-                Add to Cart
-            </button>
-        </form>
+                <form action="{{ route('cart.add', $product) }}" method="POST" style="display:inline;">
+                    @csrf
+                    <button type="submit" class="btn">
+                        Add to Cart
+                    </button>
+                </form>
 
-        <a href="/products" class="btn btn-secondary">Back to Products</a>
-
-        <a href="/products" class="btn">Back to Products</a>
+                <a href="/products" class="btn btn-secondary">
+                    Back to Products
+                </a>
+            </div>
+        </div>
     </div>
 
     <div class="detail-box" style="text-align: left;">
