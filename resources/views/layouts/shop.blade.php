@@ -657,6 +657,64 @@
             margin-top: 10px;
         }
 
+        .about-hero {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .about-hero p {
+            color: var(--muted);
+            max-width: 850px;
+            margin: 12px auto 0;
+            line-height: 1.7;
+        }
+
+        .about-section {
+            margin-top: 25px;
+            padding: 26px;
+            border-radius: 20px;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+        }
+
+        .about-section h3 {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+        }
+
+        .about-section p {
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .social-link {
+            display: inline-block;
+            padding: 12px 18px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-decoration: none;
+            font-weight: 800;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(124, 58, 237, 0.35);
+        }
+
+        .social-link.secondary {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
         @media (max-width: 900px) {
             .navbar {
                 padding: 16px 25px;
