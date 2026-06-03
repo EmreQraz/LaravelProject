@@ -397,7 +397,45 @@
 @yield('content')
 
 <footer class="footer">
-    <p>© 2026 QrazCart | Advanced Web Programming Final Project</p>
+    <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 30px; text-align: left; max-width: 1100px; margin: 0 auto;">
+        <div>
+            <h3 style="margin-bottom: 12px;">🛒 QrazCart</h3>
+            <p style="color: #cbd5e1;">
+                A modern Laravel-based e-commerce project with products, cart, authentication,
+                admin panel, FAQ, contact and user-friendly design.
+            </p>
+        </div>
+
+        <div>
+            <h3 style="margin-bottom: 12px;">Quick Links</h3>
+            <p style="line-height: 2;">
+                <a href="/" style="color: #cbd5e1; text-decoration: none;">Home</a><br>
+                <a href="/products" style="color: #cbd5e1; text-decoration: none;">Products</a><br>
+                <a href="/cart" style="color: #cbd5e1; text-decoration: none;">Cart</a><br>
+                <a href="/faq" style="color: #cbd5e1; text-decoration: none;">FAQ</a><br>
+                <a href="/about" style="color: #cbd5e1; text-decoration: none;">About</a><br>
+                <a href="/contact" style="color: #cbd5e1; text-decoration: none;">Contact</a>
+            </p>
+        </div>
+
+        <div>
+            <h3 style="margin-bottom: 12px;">Project</h3>
+            <p style="color: #cbd5e1; line-height: 2;">
+                Laravel Framework<br>
+                Blade Templates<br>
+                SQLite Database<br>
+                GitHub Version Control
+            </p>
+
+            <a href="https://github.com/EmreQraz/LaravelProject" target="_blank" style="color: #f59e0b; text-decoration: none; font-weight: bold;">
+                View on GitHub
+            </a>
+        </div>
+    </div>
+
+    <div style="border-top: 1px solid rgba(255,255,255,0.15); margin-top: 28px; padding-top: 18px;">
+        <p>© 2026 QrazCart | Advanced Web Programming Final Project</p>
+    </div>
 </footer>
 
 </body>
