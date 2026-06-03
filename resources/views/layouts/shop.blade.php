@@ -591,6 +591,72 @@
             transform: translateY(-1px);
         }
 
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #f8fafc, #ede9fe);
+            padding: 25px;
+            border-radius: 18px;
+            border: 1px solid var(--border);
+        }
+
+        .info-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .info-card p {
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .faq-list {
+            margin-top: 30px;
+            display: grid;
+            gap: 18px;
+        }
+
+        .faq-item {
+            padding: 24px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #f8fafc;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        .faq-item h3 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .faq-item p {
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .contact-header,
+        .faq-header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .contact-header p,
+        .faq-header p {
+            color: var(--muted);
+            margin-top: 10px;
+        }
+
         @media (max-width: 900px) {
             .navbar {
                 padding: 16px 25px;
@@ -624,6 +690,9 @@
             .categories,
             .products,
             .admin-stats {
+                grid-template-columns: 1fr;
+            }
+            .info-grid {
                 grid-template-columns: 1fr;
             }
 
