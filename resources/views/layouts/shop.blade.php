@@ -368,7 +368,13 @@
     <div>
         <a href="/">Home</a>
         <a href="/products">Products</a>
-        <a href="/cart">Cart</a>
+        @php
+            $cartCount = collect(session('cart', []))->sum('quantity');
+        @endphp
+
+        <a href="/cart">
+            Cart{{ $cartCount > 0 ? ' (' . $cartCount . ')' : '' }}
+        </a>
         <a href="/contact">Contact</a>
         <a href="/admin">Admin</a>
 
