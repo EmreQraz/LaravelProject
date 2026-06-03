@@ -375,8 +375,9 @@
         <a href="/cart">
             Cart{{ $cartCount > 0 ? ' (' . $cartCount . ')' : '' }}
         </a>
-        <a href="/contact">Contact</a>
         <a href="/faq">FAQ</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
         <a href="/admin">Admin</a>
 
         @auth
