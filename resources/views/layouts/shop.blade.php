@@ -539,6 +539,61 @@
             color: var(--accent);
         }
 
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            padding: 9px 12px;
+            border-radius: 10px;
+            font-weight: 700;
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .logo-link {
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .cart-badge {
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 3px 8px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+            margin-left: 4px;
+        }
+
+        .nav-logout-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: var(--white);
+            padding: 9px 12px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 15px;
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .nav-logout-btn:hover {
+            background-color: rgba(255, 255, 255, 0.14);
+            color: var(--accent);
+            transform: translateY(-1px);
+        }
+
         @media (max-width: 900px) {
             .navbar {
                 padding: 16px 25px;
@@ -584,33 +639,40 @@
 <body>
 
 <nav class="navbar">
-    <h1>🛒 QrazCart</h1>
+    <a href="/" class="logo-link">
+        <h1>🛒 QrazCart</h1>
+    </a>
 
-    <div>
-        <a href="/">Home</a>
-        <a href="/products">Products</a>
+    <div class="nav-links">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/products" class="nav-link">Products</a>
+
         @php
             $cartCount = collect(session('cart', []))->sum('quantity');
         @endphp
 
-        <a href="/cart">
-            Cart{{ $cartCount > 0 ? ' (' . $cartCount . ')' : '' }}
+        <a href="/cart" class="nav-link">
+            Cart
+            @if($cartCount > 0)
+                <span class="cart-badge">{{ $cartCount }}</span>
+            @endif
         </a>
-        <a href="/faq">FAQ</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-        <a href="/admin">Admin</a>
+
+        <a href="/faq" class="nav-link">FAQ</a>
+        <a href="/about" class="nav-link">About</a>
+        <a href="/contact" class="nav-link">Contact</a>
+        <a href="/admin" class="nav-link">Admin</a>
 
         @auth
-            <a href="/dashboard">Dashboard</a>
+            <a href="/dashboard" class="nav-link">Dashboard</a>
 
             <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                 @csrf
-                <button type="submit" class="logout-btn">Logout</button>
+                <button type="submit" class="nav-logout-btn">Logout</button>
             </form>
         @else
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
+            <a href="/login" class="nav-link">Login</a>
+            <a href="/register" class="nav-link">Register</a>
         @endauth
     </div>
 </nav>
