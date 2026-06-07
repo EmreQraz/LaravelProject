@@ -19,6 +19,9 @@ class CartController extends Controller
 
     public function add(Product $product)
     {
+        if ($product->stock <= 0) {
+            return redirect()->back()->with('success', 'This product is out of stock.');
+        }
         $cart = session()->get('cart', []);
 
         if (isset($cart[$product->id])) {

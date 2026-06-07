@@ -56,18 +56,24 @@
                         <div class="product-actions">
                             <a href="/products/{{ $product->id }}" class="btn">View Details</a>
 
-                            @auth
-                                <form action="{{ route('cart.add', $product) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-secondary">
-                                        Add to Cart
-                                    </button>
-                                </form>
+                            @if($product->stock <= 0)
+                                <button type="button" class="btn btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
+                                    Out of Stock
+                                </button>
                             @else
-                                <a href="/login" class="btn btn-secondary">
-                                    Login to Add
-                                </a>
-                            @endauth
+                                @auth
+                                    <form action="{{ route('cart.add', $product) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-secondary">
+                                            Add to Cart
+                                        </button>
+                                    </form>
+                                @else
+                                    <a href="/login" class="btn btn-secondary">
+                                        Login to Add
+                                    </a>
+                                @endauth
+                            @endif
                         </div>
                     </div>
                 </div>

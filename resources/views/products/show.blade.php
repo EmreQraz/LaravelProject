@@ -44,18 +44,24 @@
                     </p>
                 @endif
 
-                @auth
-                    <form action="{{ route('cart.add', $product) }}" method="POST" style="display:inline;">
-                        @csrf
-                        <button type="submit" class="btn">
-                            Add to Cart
-                        </button>
-                    </form>
+                @if($product->stock <= 0)
+                    <button type="button" class="btn btn-secondary" disabled style="opacity: 0.6; cursor: not-allowed;">
+                        Out of Stock
+                    </button>
                 @else
-                    <a href="/login" class="btn">
-                        Login to Add to Cart
-                    </a>
-                @endauth
+                    @auth
+                        <form action="{{ route('cart.add', $product) }}" method="POST" style="display:inline;">
+                            @csrf
+                            <button type="submit" class="btn">
+                                Add to Cart
+                            </button>
+                        </form>
+                    @else
+                        <a href="/login" class="btn">
+                            Login to Add to Cart
+                        </a>
+                    @endauth
+                @endif
 
                 <a href="/products" class="btn btn-secondary">
                     Back to Products

@@ -49,7 +49,7 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-        $request->validate([
+        $validated = $request->validate([
             'category_id' => 'required|exists:categories,id',
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -59,7 +59,7 @@ class ProductController extends Controller
             'stock' => 'required|integer|min:0',
         ]);
 
-        $product->update($request->all());
+        $product->update($validated);
 
         return redirect('/admin/products')->with('success', 'Product updated successfully.');
     }
