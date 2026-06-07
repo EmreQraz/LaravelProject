@@ -41,7 +41,12 @@
                         <tr>
                             <td>
                                 <div class="cart-product">
-                                    <span class="cart-product-icon">{{ $item['icon'] }}</span>
+                                    @if(!empty($item['image']))
+                                        <img src="{{ asset($item['image']) }}" alt="{{ $item['name'] }}" class="cart-product-image">
+                                    @else
+                                        <span class="cart-product-icon">{{ $item['icon'] }}</span>
+                                    @endif
+
                                     <strong>{{ $item['name'] }}</strong>
                                 </div>
                             </td>

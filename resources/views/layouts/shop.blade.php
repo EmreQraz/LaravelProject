@@ -1162,6 +1162,15 @@
             min-height: 190px;
         }
 
+        .cart-product-image {
+            width: 52px;
+            height: 52px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 6px 14px rgba(15, 23, 42, 0.10);
+        }
+
         @media (max-width: 900px) {
             .form-row {
                 grid-template-columns: 1fr;
