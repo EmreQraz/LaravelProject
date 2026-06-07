@@ -44,12 +44,18 @@
                     </p>
                 @endif
 
-                <form action="{{ route('cart.add', $product) }}" method="POST" style="display:inline;">
-                    @csrf
-                    <button type="submit" class="btn">
-                        Add to Cart
-                    </button>
-                </form>
+                @auth
+                    <form action="{{ route('cart.add', $product) }}" method="POST" style="display:inline;">
+                        @csrf
+                        <button type="submit" class="btn">
+                            Add to Cart
+                        </button>
+                    </form>
+                @else
+                    <a href="/login" class="btn">
+                        Login to Add to Cart
+                    </a>
+                @endauth
 
                 <a href="/products" class="btn btn-secondary">
                     Back to Products

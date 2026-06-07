@@ -88,12 +88,18 @@
                                     <div class="product-actions">
                                         <a href="/products/{{ $product->id }}" class="btn">View Details</a>
 
-                                        <form action="{{ route('cart.add', $product) }}" method="POST">
-                                            @csrf
-                                            <button type="submit" class="btn btn-secondary">
-                                                Add to Cart
-                                            </button>
-                                        </form>
+                                        @auth
+                                            <form action="{{ route('cart.add', $product) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-secondary">
+                                                    Add to Cart
+                                                </button>
+                                            </form>
+                                        @else
+                                            <a href="/login" class="btn btn-secondary">
+                                                Login to Add
+                                            </a>
+                                        @endauth
                                     </div>
                                 </div>
                             </div>

@@ -567,6 +567,12 @@
             text-decoration: none;
         }
 
+        .nav-link.active {
+            background-color: rgba(245, 158, 11, 0.18);
+            color: var(--accent);
+            box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.25);
+        }
+
         .cart-badge {
             background-color: var(--accent);
             color: var(--dark);
@@ -1208,49 +1214,56 @@
 </head>
 <body>
 
-<nav class="navbar">
+<nav class="navbar"<nav class="navbar">
     <a href="/" class="logo-link">
         <h1>🛒 QrazCart</h1>
     </a>
 
     <div class="nav-links">
-        <a href="/" class="nav-link">Home</a>
-        <a href="/products" class="nav-link">Products</a>
+        <a href="/" class="nav-link {{ request()->is('/') ? 'active' : '' }}">Home</a>
+
+        <a href="/products" class="nav-link {{ request()->is('products*') ? 'active' : '' }}">Products</a>
 
         @php
             $cartCount = collect(session('cart', []))->sum('quantity');
         @endphp
 
-        <a href="/cart" class="nav-link">
-            Cart
-            @if($cartCount > 0)
-                <span class="cart-badge">{{ $cartCount }}</span>
-            @endif
-        </a>
-
-        <a href="/faq" class="nav-link">FAQ</a>
-        <a href="/about" class="nav-link">About</a>
-        <a href="/contact" class="nav-link">Contact</a>
         @auth
-            @if(auth()->user()->hasRole('admin'))
-                <a href="/admin" class="nav-link">Admin</a>
-            @endif
+            <a href="/cart" class="nav-link {{ request()->is('cart') ? 'active' : '' }}">
+                Cart
+                @if($cartCount > 0)
+                    <span class="cart-badge">{{ $cartCount }}</span>
+                @endif
+            </a>
+        @else
+            <a href="/login" class="nav-link {{ request()->is('login') ? 'active' : '' }}">
+                Cart
+            </a>
         @endauth
 
+        <a href="/faq" class="nav-link {{ request()->is('faq') ? 'active' : '' }}">FAQ</a>
+
+        <a href="/about" class="nav-link {{ request()->is('about') ? 'active' : '' }}">About</a>
+
+        <a href="/contact" class="nav-link {{ request()->is('contact') ? 'active' : '' }}">Contact</a>
+
         @auth
-            <a href="/dashboard" class="nav-link">Dashboard</a>
+            @if(auth()->user()->hasRole('admin'))
+                <a href="/admin" class="nav-link {{ request()->is('admin*') ? 'active' : '' }}">Admin</a>
+            @endif
+
+            <a href="/dashboard" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">Dashboard</a>
 
             <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                 @csrf
                 <button type="submit" class="nav-logout-btn">Logout</button>
             </form>
         @else
-            <a href="/login" class="nav-link">Login</a>
-            <a href="/register" class="nav-link">Register</a>
+            <a href="/login" class="nav-link {{ request()->is('login') ? 'active' : '' }}">Login</a>
+            <a href="/register" class="nav-link {{ request()->is('register') ? 'active' : '' }}">Register</a>
         @endauth
     </div>
 </nav>
-
 @yield('content')
 
 <footer class="footer">
