@@ -25,6 +25,7 @@
             <div class="profile-actions" style="display: flex; flex-direction: column; gap: 10px;">
                 <a href="{{ route('profile.edit') }}" class="btn btn-secondary" style="text-align: center;">Edit Profile</a>
                 <a href="{{ route('profile.edit') }}" class="btn btn-secondary" style="text-align: center;">Change Password</a>
+                <a href="{{ route('orders.index') }}" class="btn" style="text-align: center;">My Orders</a>
             </div>
 
             @if(auth()->user()->hasRole('admin'))

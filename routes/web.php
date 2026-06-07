@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Models\Order;
+use App\Http\Controllers\MyOrderController;
 
 Route::get('/', function () {
     $categories = Category::all();
@@ -50,6 +51,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
     Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 });
+
+Route::middleware('auth')->group(function () {
+    Route::get('/my-orders', [MyOrderController::class, 'index'])->name('orders.index');
+    Route::get('/my-orders/{order}', [MyOrderController::class, 'show'])->name('orders.show');
+});
+
 Route::get('/about', function () {
     return view('about');
 })->name('about');
