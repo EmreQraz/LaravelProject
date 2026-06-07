@@ -1252,7 +1252,9 @@
                 <a href="/admin" class="nav-link {{ request()->is('admin*') ? 'active' : '' }}">Admin</a>
             @endif
 
-            <a href="/dashboard" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">Dashboard</a>
+                <a href="/dashboard" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
+                    👤 {{ auth()->user()->name }}
+                </a>
 
             <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                 @csrf
