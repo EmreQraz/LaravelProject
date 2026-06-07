@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -64,35 +65,55 @@ class CartController extends Controller
             return redirect('/cart')->with('success', 'Your cart is empty.');
         }
 
-        $total = 0;
-
         foreach ($cart as $item) {
-            $total += $item['price'] * $item['quantity'];
+            $product = Product::find($item['id']);
+
+            if (!$product) {
+                return redirect('/cart')->with('success', 'One of the products in your cart is no longer available.');
+            }
+
+            if ($product->stock < $item['quantity']) {
+                return redirect('/cart')->with('success', $product->name . ' does not have enough stock.');
+            }
         }
 
-        $user = auth()->user();
+        DB::transaction(function () use ($cart) {
+            $total = 0;
 
-        $order = Order::create([
-            'user_id' => $user ? $user->id : null,
-            'customer_name' => $user ? $user->name : 'Guest Customer',
-            'customer_email' => $user ? $user->email : 'guest@example.com',
-            'total_price' => $total,
-            'status' => 'completed',
-        ]);
+            foreach ($cart as $item) {
+                $total += $item['price'] * $item['quantity'];
+            }
 
-        foreach ($cart as $item) {
-            OrderItem::create([
-                'order_id' => $order->id,
-                'product_id' => $item['id'],
-                'product_name' => $item['name'],
-                'price' => $item['price'],
-                'quantity' => $item['quantity'],
-                'subtotal' => $item['price'] * $item['quantity'],
+            $user = auth()->user();
+
+            $order = Order::create([
+                'user_id' => $user ? $user->id : null,
+                'customer_name' => $user ? $user->name : 'Guest Customer',
+                'customer_email' => $user ? $user->email : 'guest@example.com',
+                'total_price' => $total,
+                'status' => 'completed',
             ]);
-        }
 
-        session()->forget('cart');
+            foreach ($cart as $item) {
+                $product = Product::find($item['id']);
 
-        return redirect('/cart')->with('success', 'Order #' . $order->id . ' completed successfully. Thank you for shopping with QrazCart!');
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $product->id,
+                    'product_name' => $product->name,
+                    'price' => $item['price'],
+                    'quantity' => $item['quantity'],
+                    'subtotal' => $item['price'] * $item['quantity'],
+                ]);
+
+                $product->decrement('stock', $item['quantity']);
+            }
+
+            session()->forget('cart');
+
+            session()->flash('success', 'Order #' . $order->id . ' completed successfully. Thank you for shopping with QrazCart!');
+        });
+
+        return redirect('/cart');
     }
 }
