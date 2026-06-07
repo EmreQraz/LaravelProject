@@ -1,52 +1,62 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+@extends('layouts.shop')
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+@section('title', 'Register - QrazCart')
+
+@section('content')
+
+    <div class="admin-box form-card">
+        <div class="admin-header">
+            <div>
+                <h2>Create Your QrazCart Account</h2>
+                <p>Register to add products to your cart and place orders.</p>
+            </div>
+
+            <div class="admin-actions">
+                <a href="/login" class="btn btn-secondary">Already Registered?</a>
+            </div>
         </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        @if($errors->any())
+            <div class="error-message">
+                Please check the form fields and try again.
+            </div>
+        @endif
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+            <p>
+                <label>Name</label>
+                <input type="text" name="name" value="{{ old('name') }}" required autofocus>
+            </p>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+            <p>
+                <label>Email</label>
+                <input type="email" name="email" value="{{ old('email') }}" required>
+            </p>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <div class="form-row">
+                <p>
+                    <label>Password</label>
+                    <input type="password" name="password" required>
+                </p>
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
+                <p>
+                    <label>Confirm Password</label>
+                    <input type="password" name="password_confirmation" required>
+                </p>
+            </div>
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
+            <div class="admin-actions">
+                <button type="submit" class="btn">
+                    Register
+                </button>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
+                <a href="/login" class="btn btn-secondary">
+                    Login
+                </a>
+            </div>
+        </form>
+    </div>
 
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+@endsection

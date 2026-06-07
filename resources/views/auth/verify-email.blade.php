@@ -1,31 +1,51 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-    </div>
+@extends('layouts.shop')
 
-    @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-sm text-green-600">
-            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
-        </div>
-    @endif
+@section('title', 'Verify Email - QrazCart')
 
-    <div class="mt-4 flex items-center justify-between">
-        <form method="POST" action="{{ route('verification.send') }}">
-            @csrf
+@section('content')
 
+    <div class="admin-box form-card">
+        <div class="admin-header">
             <div>
-                <x-primary-button>
-                    {{ __('Resend Verification Email') }}
-                </x-primary-button>
+                <h2>Verify Your Email</h2>
+                <p>
+                    Thanks for signing up. Please verify your email address by clicking the link we sent to your inbox.
+                </p>
             </div>
-        </form>
 
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
+            <div class="admin-actions">
+                <a href="/dashboard" class="btn btn-secondary">Dashboard</a>
+            </div>
+        </div>
 
-            <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                {{ __('Log Out') }}
-            </button>
-        </form>
+        @if(session('status') == 'verification-link-sent')
+            <div class="success-message">
+                A new verification link has been sent to your email address.
+            </div>
+        @endif
+
+        <div class="about-section">
+            <h3>Email Verification Required</h3>
+            <p>
+                If you did not receive the email, you can request a new verification link below.
+            </p>
+
+            <div class="admin-actions" style="margin-top: 20px;">
+                <form method="POST" action="{{ route('verification.send') }}">
+                    @csrf
+                    <button type="submit" class="btn">
+                        Resend Verification Email
+                    </button>
+                </form>
+
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-secondary">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
-</x-guest-layout>
+
+@endsection
