@@ -20,26 +20,39 @@ class CartController extends Controller
     public function add(Product $product)
     {
         if ($product->stock <= 0) {
-            return redirect()->back()->with('success', 'This product is out of stock.');
+            return redirect()->back()->with('error', 'This product is out of stock.');
         }
+
         $cart = session()->get('cart', []);
+
+        $currentQuantity = 0;
+
+        if (isset($cart[$product->id])) {
+            $currentQuantity = $cart[$product->id]['quantity'];
+        }
+
+        if ($currentQuantity >= $product->stock) {
+            return redirect()->back()->with('error', 'You cannot add more than the available stock for ' . $product->name . '.');
+        }
 
         if (isset($cart[$product->id])) {
             $cart[$product->id]['quantity']++;
+            $cart[$product->id]['image'] = $product->image;
+            $cart[$product->id]['icon'] = $product->icon;
         } else {
             $cart[$product->id] = [
                 'id' => $product->id,
                 'name' => $product->name,
                 'price' => $product->price,
-                'icon' => $product->icon,
-                'image' => $product->image,
                 'quantity' => 1,
+                'image' => $product->image,
+                'icon' => $product->icon,
             ];
         }
 
         session()->put('cart', $cart);
 
-        return redirect()->back()->with('success', 'Product added to cart successfully.');
+        return redirect()->back()->with('success', $product->name . ' added to cart.');
     }
 
     public function remove($id)

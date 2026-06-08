@@ -1278,6 +1278,40 @@
                 transform: translateY(-4px);
             }
         }
+        .flash-message {
+            max-width: 1180px;
+            margin: 18px auto 0;
+            padding: 13px 16px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+            animation: flashSlideDown 0.35s ease both;
+        }
+
+        .flash-success {
+            background: #ecfdf5;
+            color: #047857;
+            border: 1px solid #a7f3d0;
+        }
+
+        .flash-error {
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+        }
+
+        @keyframes flashSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
         @media (max-width: 900px) {
             .form-row {
@@ -1397,6 +1431,17 @@
         @endauth
     </div>
 </nav>
+@if(session('success'))
+    <div class="flash-message flash-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="flash-message flash-error">
+        {{ session('error') }}
+    </div>
+@endif
 @yield('content')
 
 <footer class="footer">
