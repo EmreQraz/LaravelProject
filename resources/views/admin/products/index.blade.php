@@ -61,6 +61,7 @@
 
                         <td>
                             <div class="admin-actions">
+                                <a href="{{ route('admin.products.show', $product) }}" class="btn btn-secondary">Show</a>
                                 <a href="{{ route('admin.products.edit', $product) }}" class="btn">Edit</a>
 
                                 <form action="{{ route('admin.products.destroy', $product) }}" method="POST">

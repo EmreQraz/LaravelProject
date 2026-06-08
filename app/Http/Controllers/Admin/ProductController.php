@@ -40,6 +40,12 @@ class ProductController extends Controller
         return redirect('/admin/products')->with('success', 'Product created successfully.');
     }
 
+    public function show(Product $product)
+    {
+        $product->load('category');
+
+        return view('admin.products.show', compact('product'));
+    }
     public function edit(Product $product)
     {
         $categories = Category::all();
