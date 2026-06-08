@@ -244,7 +244,27 @@ qrazcart
 
 ---
 
-### 3. Configure `.env`
+### 3. Create `.env` File
+
+Laravel projects do not include the `.env` file on GitHub for security reasons.
+
+Create a new `.env` file by copying `.env.example`.
+
+For Windows PowerShell:
+
+```bash
+copy .env.example .env
+```
+
+For Mac/Linux:
+
+```bash
+cp .env.example .env
+```
+
+---
+
+### 4. Configure `.env`
 
 Make sure the database settings in `.env` are:
 
@@ -259,7 +279,7 @@ DB_PASSWORD=
 
 ---
 
-### 4. Install Dependencies
+### 5. Install Dependencies
 
 Run:
 
@@ -270,7 +290,7 @@ npm install
 
 ---
 
-### 5. Generate Application Key
+### 6. Generate Application Key
 
 Run:
 
@@ -280,7 +300,7 @@ php artisan key:generate
 
 ---
 
-### 6. Run Migrations and Seeders
+### 7. Run Migrations and Seeders
 
 For a fresh setup, run:
 
@@ -292,7 +312,7 @@ This command creates all database tables and inserts sample data.
 
 ---
 
-### 7. Start Laravel Server
+### 8. Start Laravel Server
 
 Run:
 
@@ -351,6 +371,7 @@ Password: password
 
 * The project uses XAMPP MySQL database.
 * phpMyAdmin is used for database management.
+* The `.env` file is not included on GitHub and must be created from `.env.example`.
 * The shopping cart is session-based.
 * Users must be logged in to add products to cart and place orders.
 * Admin pages are protected with role-based access control.
