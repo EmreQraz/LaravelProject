@@ -1195,10 +1195,107 @@
             box-shadow: 0 6px 14px rgba(15, 23, 42, 0.10);
         }
 
+        .shipping-campaign {
+            padding: 14px 42px;
+            background:
+                linear-gradient(90deg, rgba(245, 158, 11, 0.18), rgba(124, 58, 237, 0.10)),
+                #fff7ed;
+            border-top: 1px solid rgba(245, 158, 11, 0.22);
+            border-bottom: 1px solid rgba(245, 158, 11, 0.22);
+            overflow: hidden;
+        }
+
+        .shipping-campaign-content {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            animation: campaignSlide 0.8s ease both;
+        }
+
+        .campaign-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #f97316);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 10px 24px rgba(245, 158, 11, 0.28);
+            animation: campaignBounce 1.8s ease-in-out infinite;
+        }
+
+        .shipping-campaign strong {
+            display: block;
+            color: var(--dark);
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+
+        .shipping-campaign p {
+            color: var(--muted);
+            margin: 0;
+            font-size: 13px;
+        }
+
+        .campaign-link {
+            margin-left: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: var(--accent);
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 13px;
+            box-shadow: 0 8px 18px rgba(245, 158, 11, 0.22);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .campaign-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(245, 158, 11, 0.32);
+        }
+
+        @keyframes campaignSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes campaignBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
         @media (max-width: 900px) {
             .form-row {
                 grid-template-columns: 1fr;
             }
+        }
+        .shipping-campaign {
+            padding: 14px 22px;
+        }
+
+        .shipping-campaign-content {
+            flex-direction: column;
+            text-align: center;
+            gap: 10px;
+        }
+
+        .campaign-link {
+            margin-left: 0;
         }
 
         @media (max-width: 900px) {

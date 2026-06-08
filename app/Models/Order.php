@@ -12,6 +12,13 @@ class Order extends Model
         'customer_email',
         'total_price',
         'status',
+        'phone',
+        'address',
+        'city',
+        'subtotal',
+        'shipping_price',
+        'shipping_method',
+        'payment_method',
     ];
 
     public const STATUSES = [

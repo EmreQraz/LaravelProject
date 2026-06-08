@@ -81,12 +81,9 @@
                         </button>
                     </form>
 
-                    <form action="{{ route('cart.checkout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn">
-                            Checkout
-                        </button>
-                    </form>
+                    <a href="{{ route('checkout.form') }}" class="btn">
+                        Checkout
+                    </a>
                 </div>
             </div>
         @else

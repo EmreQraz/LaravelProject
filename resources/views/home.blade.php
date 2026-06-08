@@ -6,23 +6,26 @@
 
     <section class="hero">
         <div>
+
             <h2>Discover Smart Shopping with QrazCart</h2>
+
             <p>
                 QrazCart is a modern Laravel-based e-commerce platform with product listing,
-                user authentication, role-based admin access, and product management features.
+                user authentication, role-based admin access, shopping cart, checkout and order management features.
             </p>
 
-            <a href="/products" class="btn">Shop Now</a>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="/products" class="btn">Shop Now</a>
 
-            @auth
-                <a href="/dashboard" class="btn btn-secondary">My Dashboard</a>
-            @else
-                <a href="/login" class="btn btn-secondary">Login</a>
-            @endauth
+                @auth
+                    <a href="/dashboard" class="btn btn-secondary">My Dashboard</a>
+                @else
+                    <a href="/login" class="btn btn-secondary">Login</a>
+                @endauth
+            </div>
         </div>
 
         <div class="hero-card">
-
             <h3>Why QrazCart?</h3>
 
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px;">
@@ -41,6 +44,19 @@
                     <p style="margin: 6px 0 0; font-size: 12px;">Full control.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="shipping-campaign">
+        <div class="shipping-campaign-content">
+            <span class="campaign-icon">🚚</span>
+
+            <div>
+                <strong>Free Shipping Campaign!</strong>
+                <p>All QrazCart orders include free shipping until the end of 2026.</p>
+            </div>
+
+            <a href="/products" class="campaign-link">Shop the Deal</a>
         </div>
     </section>
 

@@ -61,8 +61,35 @@ class CartController extends Controller
         return redirect('/cart')->with('success', 'Cart cleared successfully.');
     }
 
-    public function checkout()
+    public function checkoutForm()
     {
+        $cart = session()->get('cart', []);
+
+        if (count($cart) === 0) {
+            return redirect('/cart')->with('success', 'Your cart is empty.');
+        }
+
+        $subtotal = 0;
+
+        foreach ($cart as $item) {
+            $subtotal += $item['price'] * $item['quantity'];
+        }
+
+        $shippingPrice = 0;
+        $total = $subtotal + $shippingPrice;
+
+        return view('checkout', compact('cart', 'subtotal', 'shippingPrice', 'total'));
+    }
+
+    public function placeOrder(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required|string|max:30',
+            'address' => 'required|string|max:1000',
+            'city' => 'required|string|max:255',
+            'payment_method' => 'required|string|max:255',
+        ]);
+
         $cart = session()->get('cart', []);
 
         if (count($cart) === 0) {
@@ -81,19 +108,29 @@ class CartController extends Controller
             }
         }
 
-        DB::transaction(function () use ($cart) {
-            $total = 0;
+        DB::transaction(function () use ($cart, $request) {
+            $subtotal = 0;
 
             foreach ($cart as $item) {
-                $total += $item['price'] * $item['quantity'];
+                $subtotal += $item['price'] * $item['quantity'];
             }
+
+            $shippingPrice = 0;
+            $total = $subtotal + $shippingPrice;
 
             $user = auth()->user();
 
             $order = Order::create([
-                'user_id' => $user ? $user->id : null,
-                'customer_name' => $user ? $user->name : 'Guest Customer',
-                'customer_email' => $user ? $user->email : 'guest@example.com',
+                'user_id' => $user->id,
+                'customer_name' => $user->name,
+                'customer_email' => $user->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'city' => $request->city,
+                'subtotal' => $subtotal,
+                'shipping_price' => $shippingPrice,
+                'shipping_method' => 'Free Shipping',
+                'payment_method' => $request->payment_method,
                 'total_price' => $total,
                 'status' => 'New',
             ]);
@@ -115,7 +152,7 @@ class CartController extends Controller
 
             session()->forget('cart');
 
-            session()->flash('success', 'Order #' . $order->id . ' completed successfully. Thank you for shopping with QrazCart!');
+            session()->flash('success', 'Order #' . $order->id . ' completed successfully. Free shipping has been applied!');
         });
 
         return redirect('/cart');

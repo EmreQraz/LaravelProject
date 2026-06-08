@@ -8,6 +8,12 @@
         <h2>Order Details #{{ $order->id }}</h2>
         <p>Detailed information about this customer order is shown below.</p>
 
+        @if(session('success'))
+            <div class="success-message">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <div class="order-info-grid">
             <div class="order-info-card">
                 <p>Customer</p>
@@ -32,15 +38,32 @@
                 <p>Order Date</p>
                 <h3>{{ $order->created_at->format('d.m.Y H:i') }}</h3>
             </div>
+
+            <div class="order-info-card">
+                <p>Phone</p>
+                <h3>{{ $order->phone ?? '-' }}</h3>
+            </div>
+
+            <div class="order-info-card">
+                <p>City</p>
+                <h3>{{ $order->city ?? '-' }}</h3>
+            </div>
+
+            <div class="order-info-card">
+                <p>Payment Method</p>
+                <h3>{{ $order->payment_method ?? '-' }}</h3>
+            </div>
+
+            <div class="order-info-card">
+                <p>Shipping Method</p>
+                <h3>{{ $order->shipping_method ?? 'Free Shipping' }}</h3>
+            </div>
         </div>
 
-        <a href="{{ route('admin.orders.index') }}" class="btn">Back to Orders</a>
-
-        @if(session('success'))
-            <div class="success-message">
-                {{ session('success') }}
-            </div>
-        @endif
+        <div class="about-section">
+            <h3>Delivery Address</h3>
+            <p>{{ $order->address ?? 'No address information.' }}</p>
+        </div>
 
         <div class="about-section" style="margin-top: 25px;">
             <h3>Update Order Status</h3>
@@ -65,6 +88,12 @@
                 </button>
             </form>
         </div>
+
+        <br>
+
+        <a href="{{ route('admin.orders.index') }}" class="btn btn-secondary">
+            Back to Orders
+        </a>
 
         <div class="table-wrapper">
             <table>
@@ -93,8 +122,15 @@
         </div>
 
         <div class="order-total-box">
-            <p>Total Price</p>
-            <h3>${{ number_format($order->total_price, 2) }}</h3>
+            <p>Subtotal: ${{ number_format($order->subtotal ?? $order->total_price, 2) }}</p>
+            <p>
+                Shipping:
+                {{ $order->shipping_method ?? 'Free Shipping' }}
+                -
+                ${{ number_format($order->shipping_price ?? 0, 2) }}
+            </p>
+
+            <h3>Total Price: ${{ number_format($order->total_price, 2) }}</h3>
         </div>
     </div>
 
