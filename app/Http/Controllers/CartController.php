@@ -17,21 +17,34 @@ class CartController extends Controller
         return view('cart.index', compact('cart'));
     }
 
-    public function add(Product $product)
+    public function add(Request $request, Product $product)
     {
+        $cart = session()->get('cart', []);
+
+        $cartCount = collect($cart)->sum('quantity');
+        $currentQuantity = $cart[$product->id]['quantity'] ?? 0;
+
         if ($product->stock <= 0) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'This product is out of stock.',
+                    'cart_count' => $cartCount,
+                ], 422);
+            }
+
             return redirect()->back()->with('error', 'This product is out of stock.');
         }
 
-        $cart = session()->get('cart', []);
-
-        $currentQuantity = 0;
-
-        if (isset($cart[$product->id])) {
-            $currentQuantity = $cart[$product->id]['quantity'];
-        }
-
         if ($currentQuantity >= $product->stock) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'You cannot add more than the available stock for ' . $product->name . '.',
+                    'cart_count' => $cartCount,
+                ], 422);
+            }
+
             return redirect()->back()->with('error', 'You cannot add more than the available stock for ' . $product->name . '.');
         }
 
@@ -51,6 +64,16 @@ class CartController extends Controller
         }
 
         session()->put('cart', $cart);
+
+        $cartCount = collect($cart)->sum('quantity');
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => $product->name . ' added to cart.',
+                'cart_count' => $cartCount,
+            ]);
+        }
 
         return redirect()->back()->with('success', $product->name . ' added to cart.');
     }

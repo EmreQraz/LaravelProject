@@ -52,9 +52,6 @@
                     Register
                 </button>
 
-                <a href="/login" class="btn btn-secondary">
-                    Login
-                </a>
             </div>
         </form>
     </div>

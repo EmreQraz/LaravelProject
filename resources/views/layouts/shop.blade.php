@@ -1313,6 +1313,91 @@
             }
         }
 
+        .cart-count-badge {
+            min-width: 20px;
+            height: 20px;
+            margin-left: 5px;
+            padding: 0 6px;
+            border-radius: 999px;
+            background: var(--accent);
+            color: var(--dark);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 900;
+            line-height: 1;
+            box-shadow: 0 6px 14px rgba(245, 158, 11, 0.25);
+        }
+
+        .ajax-toast {
+            position: fixed;
+            top: 22px;
+            right: 22px;
+            z-index: 9999;
+            min-width: 240px;
+            max-width: 360px;
+            padding: 13px 16px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 800;
+            box-shadow: 0 18px 38px rgba(15, 23, 42, 0.18);
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: 0.3s ease;
+        }
+
+        .ajax-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .ajax-toast-success {
+            background: #ecfdf5;
+            color: #047857;
+            border: 1px solid #a7f3d0;
+        }
+
+        .ajax-toast-error {
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+        }
+
+        .ajax-toast {
+            position: fixed;
+            top: 22px;
+            right: 22px;
+            z-index: 9999;
+            min-width: 240px;
+            max-width: 360px;
+            padding: 13px 16px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 800;
+            box-shadow: 0 18px 38px rgba(15, 23, 42, 0.18);
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: 0.3s ease;
+        }
+
+        .ajax-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .ajax-toast-success {
+            background: #ecfdf5;
+            color: #047857;
+            border: 1px solid #a7f3d0;
+        }
+
+        .ajax-toast-error {
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+        }
+
         @media (max-width: 900px) {
             .form-row {
                 grid-template-columns: 1fr;
@@ -1389,19 +1474,23 @@
 
         <a href="/products" class="nav-link {{ request()->is('products*') ? 'active' : '' }}">Products</a>
 
-        @php
-            $cartCount = collect(session('cart', []))->sum('quantity');
-        @endphp
-
         @auth
-            <a href="/cart" class="nav-link {{ request()->is('cart') ? 'active' : '' }}">
+            @php
+                $cartCount = collect(session('cart', []))->sum('quantity');
+            @endphp
+
+            <a href="/cart" class="{{ request()->is('cart') ? 'active' : '' }}">
                 Cart
-                @if($cartCount > 0)
-                    <span class="cart-badge">{{ $cartCount }}</span>
-                @endif
+                <span
+                    id="cart-count-badge"
+                    class="cart-count-badge"
+                    style="{{ $cartCount > 0 ? '' : 'display: none;' }}"
+                >
+            {{ $cartCount }}
+        </span>
             </a>
         @else
-            <a href="/login" class="nav-link {{ request()->is('login') ? 'active' : '' }}">
+            <a href="/login">
                 Cart
             </a>
         @endauth
@@ -1485,6 +1574,103 @@
         <p>© 2026 QrazCart | Advanced Web Programming Final Project</p>
     </div>
 </footer>
+<script>
+    document.addEventListener('submit', function (event) {
+        const form = event.target;
+        const action = form.getAttribute('action') || '';
 
+        if (!action.includes('/cart/add')) {
+            return;
+        }
+
+        event.preventDefault();
+
+        const button = form.querySelector('button[type="submit"]');
+        const originalText = button ? button.innerHTML : '';
+
+        if (button) {
+            button.disabled = true;
+            button.innerHTML = 'Adding...';
+        }
+
+        fetch(action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+            },
+            credentials: 'same-origin'
+        })
+            .then(async function (response) {
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw data;
+                }
+
+                return data;
+            })
+            .then(function (data) {
+                showAjaxMessage(data.message, 'success');
+                updateCartCount(data.cart_count);
+            })
+            .catch(function (error) {
+                showAjaxMessage(error.message || 'Something went wrong.', 'error');
+
+                if (error.cart_count !== undefined) {
+                    updateCartCount(error.cart_count);
+                }
+            })
+            .finally(function () {
+                if (button) {
+                    button.disabled = false;
+                    button.innerHTML = originalText;
+                }
+            });
+    });
+
+    function updateCartCount(count) {
+        const badge = document.getElementById('cart-count-badge');
+
+        if (!badge) {
+            return;
+        }
+
+        badge.textContent = count;
+
+        if (count > 0) {
+            badge.style.display = 'inline-flex';
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
+    function showAjaxMessage(message, type) {
+        const oldMessage = document.querySelector('.ajax-toast');
+
+        if (oldMessage) {
+            oldMessage.remove();
+        }
+
+        const toast = document.createElement('div');
+        toast.className = 'ajax-toast ajax-toast-' + type;
+        toast.textContent = message;
+
+        document.body.appendChild(toast);
+
+        setTimeout(function () {
+            toast.classList.add('show');
+        }, 50);
+
+        setTimeout(function () {
+            toast.classList.remove('show');
+
+            setTimeout(function () {
+                toast.remove();
+            }, 300);
+        }, 2500);
+    }
+</script>
 </body>
 </html>
