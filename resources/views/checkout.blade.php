@@ -88,11 +88,11 @@
                         </thead>
 
                         <tbody>
-                        @foreach($cart as $item)
+                        @foreach($cartItems as $item)
                             <tr>
-                                <td>{{ $item['name'] }}</td>
-                                <td>{{ $item['quantity'] }}</td>
-                                <td>${{ number_format($item['price'] * $item['quantity'], 2) }}</td>
+                                <td>{{ $item->product->name ?? 'Product Deleted' }}</td>
+                                <td>{{ $item->quantity }}</td>
+                                <td>${{ number_format($item->price * $item->quantity, 2) }}</td>
                             </tr>
                         @endforeach
                         </tbody>

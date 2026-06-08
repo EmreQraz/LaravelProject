@@ -35,6 +35,17 @@ class DatabaseSeeder extends Seeder
 
         $adminUser->roles()->syncWithoutDetaching([$adminRole->id, $userRole->id]);
 
+        // Create additional test user
+        $testUser = User::firstOrCreate(
+            ['email' => 'user@example.com'],
+            [
+                'name' => 'Test User',
+                'password' => Hash::make('password'),
+            ]
+        );
+
+        $testUser->roles()->syncWithoutDetaching([$userRole->id]);
+
         $electronics = Category::firstOrCreate([
             'name' => 'Electronics',
         ], [

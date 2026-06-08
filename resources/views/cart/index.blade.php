@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        @if(count($cart) > 0)
+        @if($cartItems->count() > 0)
             @php
                 $total = 0;
             @endphp
@@ -27,36 +27,42 @@
                         <th>Price</th>
                         <th>Quantity</th>
                         <th>Subtotal</th>
-                        <th>Action</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
 
                     <tbody>
-                    @foreach($cart as $item)
+                    @foreach($cartItems as $item)
                         @php
-                            $subtotal = $item['price'] * $item['quantity'];
+                            $subtotal = $item->price * $item->quantity;
                             $total += $subtotal;
                         @endphp
 
                         <tr>
                             <td>
                                 <div class="cart-product">
-                                    @if(!empty($item['image']))
-                                        <img src="{{ asset($item['image']) }}" alt="{{ $item['name'] }}" class="cart-product-image">
-                                    @else
-                                        <span class="cart-product-icon">{{ $item['icon'] }}</span>
+                                    @if($item->product && !empty($item->product->image))
+                                        <img src="{{ asset($item->product->image) }}" alt="{{ $item->product->name }}" class="cart-product-image">
+                                    @elseif($item->product && !empty($item->product->icon))
+                                        <span class="cart-product-icon">{{ $item->product->icon }}</span>
                                     @endif
 
-                                    <strong>{{ $item['name'] }}</strong>
+                                    <strong>{{ $item->product->name ?? 'Product Deleted' }}</strong>
                                 </div>
                             </td>
-                            <td>${{ number_format($item['price'], 2) }}</td>
-                            <td>{{ $item['quantity'] }}</td>
+                            <td>${{ number_format($item->price, 2) }}</td>
+                            <td>
+                                <form action="{{ route('cart.update', $item->id) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    <input type="number" name="quantity" value="{{ $item->quantity }}" min="1" max="{{ $item->product->stock ?? 1 }}" style="width: 60px;">
+                                    <button type="submit" class="btn btn-sm">Update</button>
+                                </form>
+                            </td>
                             <td>${{ number_format($subtotal, 2) }}</td>
                             <td>
-                                <form action="{{ route('cart.remove', $item['id']) }}" method="POST">
+                                <form action="{{ route('cart.remove', $item->id) }}" method="POST" style="display: inline;">
                                     @csrf
-                                    <button type="submit" class="btn btn-secondary">
+                                    <button type="submit" class="btn btn-secondary btn-sm">
                                         Remove
                                     </button>
                                 </form>
@@ -74,7 +80,7 @@
                 </div>
 
                 <div class="cart-actions">
-                    <form action="{{ route('cart.clear') }}" method="POST">
+                    <form action="{{ route('cart.clear') }}" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="btn btn-secondary">
                             Clear Cart
