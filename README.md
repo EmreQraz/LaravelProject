@@ -111,16 +111,21 @@ Completed
 
 ### Shopping Cart Features
 
-* Session-based shopping cart
+* Database-backed shopping cart
+* Cart items are stored in the `carts` table
 * Add to cart
 * Remove from cart
 * Clear cart
 * Cart total calculation
 * Product image display in cart
 * Login required for cart and checkout
+* Cart item count in navbar
+* AJAX add to cart without page refresh
+* Success and error toast messages
+* Prevents adding products beyond available stock
 * Checkout validates stock before order creation
 
-The project currently uses a **session-based cart system** instead of a database-backed cart table. This keeps the cart system simple and works well for the current project scope.
+The project uses a **database-backed cart system**. Cart items are stored in the `carts` table for each authenticated user. This allows cart data to be managed through the database instead of only using session data.
 
 ---
 
@@ -375,12 +380,13 @@ Password: password
 * The project uses XAMPP MySQL database.
 * phpMyAdmin is used for database management.
 * The `.env` file is not included on GitHub and must be created from `.env.example`.
-* The shopping cart is session-based.
+* The shopping cart is database-backed.
 * Users must be logged in to add products to cart and place orders.
 * Admin pages are protected with role-based access control.
 * Product stock decreases after checkout.
 * Products with zero stock cannot be added to cart.
 * Free shipping is applied to all orders until the end of 2026.
+* The shopping cart is stored in the database using the `carts` table.
 
 ---
 
@@ -392,7 +398,6 @@ Possible future improvements:
 * Show contact messages in the admin panel
 * Add product image upload system
 * Add real product review system
-* Add database-backed cart table if needed
 * Improve order reporting for admin users
 
 ---
