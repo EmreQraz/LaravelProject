@@ -574,16 +574,6 @@
             box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.25);
         }
 
-        .cart-badge {
-            background-color: var(--accent);
-            color: var(--dark);
-            padding: 3px 8px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 800;
-            margin-left: 4px;
-        }
-
         .nav-logout-btn {
             background: rgba(255, 255, 255, 0.08);
             border: none;
@@ -1313,55 +1303,30 @@
             }
         }
 
-        .cart-count-badge {
-            min-width: 20px;
-            height: 20px;
-            margin-left: 5px;
-            padding: 0 6px;
+        .cart-nav-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .cart-count-badge,
+        .cart-badge {
+            position: absolute;
+            top: -7px;
+            right: -8px;
+            min-width: 17px;
+            height: 17px;
+            padding: 0 5px;
             border-radius: 999px;
             background: var(--accent);
             color: var(--dark);
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 900;
             line-height: 1;
             box-shadow: 0 6px 14px rgba(245, 158, 11, 0.25);
-        }
-
-        .ajax-toast {
-            position: fixed;
-            top: 22px;
-            right: 22px;
-            z-index: 9999;
-            min-width: 240px;
-            max-width: 360px;
-            padding: 13px 16px;
-            border-radius: 16px;
-            font-size: 14px;
-            font-weight: 800;
-            box-shadow: 0 18px 38px rgba(15, 23, 42, 0.18);
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: 0.3s ease;
-        }
-
-        .ajax-toast.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .ajax-toast-success {
-            background: #ecfdf5;
-            color: #047857;
-            border: 1px solid #a7f3d0;
-        }
-
-        .ajax-toast-error {
-            background: #fef2f2;
-            color: #b91c1c;
-            border: 1px solid #fecaca;
         }
 
         .ajax-toast {
@@ -1479,7 +1444,7 @@
                 $cartCount = collect(session('cart', []))->sum('quantity');
             @endphp
 
-            <a href="/cart" class="{{ request()->is('cart') ? 'active' : '' }}">
+            <a href="/cart" class="nav-link cart-nav-link {{ request()->is('cart*') || request()->is('checkout') ? 'active' : '' }}">
                 Cart
                 <span
                     id="cart-count-badge"
@@ -1490,7 +1455,7 @@
         </span>
             </a>
         @else
-            <a href="/login">
+            <a href="/login" class="nav-link {{ request()->is('cart*') ? 'active' : '' }}">
                 Cart
             </a>
         @endauth
@@ -1560,7 +1525,7 @@
             <p style="color: #cbd5e1; line-height: 2;">
                 Laravel Framework<br>
                 Blade Templates<br>
-                SQLite Database<br>
+                XAMPP MySQL Database<br>
                 GitHub Version Control
             </p>
 
