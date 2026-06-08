@@ -22,8 +22,8 @@
             <div class="order-info-card">
                 <p>Status</p>
                 <h3>
-                <span class="status-badge status-completed">
-                    {{ ucfirst($order->status) }}
+                <span class="status-badge status-{{ strtolower($order->status) }}">
+                    {{ $order->status }}
                 </span>
                 </h3>
             </div>
@@ -35,6 +35,36 @@
         </div>
 
         <a href="{{ route('admin.orders.index') }}" class="btn">Back to Orders</a>
+
+        @if(session('success'))
+            <div class="success-message">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <div class="about-section" style="margin-top: 25px;">
+            <h3>Update Order Status</h3>
+            <p>Admin can update the current status of this order.</p>
+
+            <form action="{{ route('admin.orders.updateStatus', $order) }}" method="POST" style="margin-top: 15px;">
+                @csrf
+
+                <p>
+                    <label>Status</label>
+                    <select name="status" required>
+                        @foreach(\App\Models\Order::STATUSES as $status)
+                            <option value="{{ $status }}" {{ $order->status === $status ? 'selected' : '' }}>
+                                {{ $status }}
+                            </option>
+                        @endforeach
+                    </select>
+                </p>
+
+                <button type="submit" class="btn">
+                    Update Status
+                </button>
+            </form>
+        </div>
 
         <div class="table-wrapper">
             <table>

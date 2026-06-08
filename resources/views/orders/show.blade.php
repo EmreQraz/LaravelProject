@@ -30,9 +30,9 @@
             <div class="order-info-card">
                 <p>Status</p>
                 <h3>
-                <span class="status-badge status-completed">
-                    {{ ucfirst($order->status) }}
-                </span>
+               <span class="status-badge status-{{ strtolower($order->status) }}">
+    {{ $order->status }}
+</span>
                 </h3>
             </div>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -20,4 +21,18 @@ class OrderController extends Controller
 
         return view('admin.orders.show', compact('order'));
     }
+    public function updateStatus(Request $request, Order $order)
+    {
+        $request->validate([
+            'status' => 'required|in:New,Accepted,Cancelled,Onshipping,Completed',
+        ]);
+
+        $order->update([
+            'status' => $request->status,
+        ]);
+
+        return redirect()->back()->with('success', 'Order status updated successfully.');
+    }
 }
+
+

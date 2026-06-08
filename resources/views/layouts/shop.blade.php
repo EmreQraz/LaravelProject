@@ -896,6 +896,30 @@
 
         .status-badge {
             animation: softFade 0.4s ease both;
+            .status-new {
+                background-color: #dbeafe;
+                color: #1d4ed8;
+            }
+
+            .status-accepted {
+                background-color: #ede9fe;
+                color: #6d28d9;
+            }
+
+            .status-cancelled {
+                background-color: #fee2e2;
+                color: #991b1b;
+            }
+
+            .status-onshipping {
+                background-color: #fef3c7;
+                color: #92400e;
+            }
+
+            .status-completed {
+                background-color: #dcfce7;
+                color: #166534;
+            }
         }
 
         body {

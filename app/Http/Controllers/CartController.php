@@ -95,7 +95,7 @@ class CartController extends Controller
                 'customer_name' => $user ? $user->name : 'Guest Customer',
                 'customer_email' => $user ? $user->email : 'guest@example.com',
                 'total_price' => $total,
-                'status' => 'completed',
+                'status' => 'New',
             ]);
 
             foreach ($cart as $item) {

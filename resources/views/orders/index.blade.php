@@ -37,9 +37,9 @@
                             <td>{{ $order->created_at->format('d.m.Y H:i') }}</td>
                             <td>${{ number_format($order->total_price, 2) }}</td>
                             <td>
-                                <span class="status-badge status-completed">
-                                    {{ ucfirst($order->status) }}
-                                </span>
+                               <span class="status-badge status-{{ strtolower($order->status) }}">
+    {{ $order->status }}
+</span>
                             </td>
                             <td>
                                 <a href="{{ route('orders.show', $order) }}" class="btn">

@@ -35,8 +35,8 @@
                         <td>{{ $order->customer_email }}</td>
                         <td>${{ number_format($order->total_price, 2) }}</td>
                         <td>
-    <span class="status-badge status-completed">
-        {{ ucfirst($order->status) }}
+    <span class="status-badge status-{{ strtolower($order->status) }}">
+    {{ $order->status }}
     </span>
                         </td>
                         <td>{{ $order->created_at->format('d.m.Y H:i') }}</td>

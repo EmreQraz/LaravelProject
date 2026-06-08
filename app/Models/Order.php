@@ -14,6 +14,14 @@ class Order extends Model
         'status',
     ];
 
+    public const STATUSES = [
+        'New',
+        'Accepted',
+        'Cancelled',
+        'Onshipping',
+        'Completed',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
