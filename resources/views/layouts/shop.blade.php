@@ -197,11 +197,6 @@
             font-weight: 800;
         }
 
-        .status-completed {
-            background-color: #dcfce7;
-            color: #166534;
-        }
-
         .empty-state {
             margin-top: 30px;
             text-align: center;
@@ -885,31 +880,37 @@
         }
 
         .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 800;
             animation: softFade 0.4s ease both;
-            .status-new {
-                background-color: #dbeafe;
-                color: #1d4ed8;
-            }
+        }
 
-            .status-accepted {
-                background-color: #ede9fe;
-                color: #6d28d9;
-            }
+        .status-new {
+            background-color: #dbeafe;
+            color: #1d4ed8;
+        }
 
-            .status-cancelled {
-                background-color: #fee2e2;
-                color: #991b1b;
-            }
+        .status-accepted {
+            background-color: #ede9fe;
+            color: #6d28d9;
+        }
 
-            .status-onshipping {
-                background-color: #fef3c7;
-                color: #92400e;
-            }
+        .status-cancelled {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
 
-            .status-completed {
-                background-color: #dcfce7;
-                color: #166534;
-            }
+        .status-onshipping {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-completed {
+            background-color: #dcfce7;
+            color: #166534;
         }
 
         body {
@@ -1441,7 +1442,7 @@
 
         @auth
             @php
-                $cartCount = collect(session('cart', []))->sum('quantity');
+                $cartCount = \App\Models\Cart::where('user_id', auth()->id())->sum('quantity');
             @endphp
 
             <a href="/cart" class="nav-link cart-nav-link {{ request()->is('cart*') || request()->is('checkout') ? 'active' : '' }}">
@@ -1455,7 +1456,7 @@
         </span>
             </a>
         @else
-            <a href="/login" class="nav-link {{ request()->is('cart*') ? 'active' : '' }}">
+            <a href="/login" class="nav-link {{ request()->is('login') ? 'active' : '' }}">
                 Cart
             </a>
         @endauth
@@ -1540,7 +1541,50 @@
     </div>
 </footer>
 <script>
-    document.addEventListener('submit', function (event) {
+    function updateCartCount(count) {
+        const badge = document.getElementById('cart-count-badge');
+
+        if (!badge) {
+            return;
+        }
+
+        badge.textContent = count;
+
+        if (count > 0) {
+            badge.style.display = 'inline-flex';
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
+    function showAjaxMessage(message, type) {
+        const oldMessage = document.querySelector('.ajax-toast');
+
+        if (oldMessage) {
+            oldMessage.remove();
+        }
+
+        const toast = document.createElement('div');
+        toast.className = 'ajax-toast ajax-toast-' + type;
+        toast.textContent = message;
+
+        document.body.appendChild(toast);
+
+        setTimeout(function () {
+            toast.classList.add('show');
+        }, 50);
+
+        setTimeout(function () {
+            toast.classList.remove('show');
+
+            setTimeout(function () {
+                toast.remove();
+            }, 300);
+        }, 2500);
+    }
+</script>
+<script>
+    document.addEventListener('submit', async function (event) {
         const form = event.target;
         const action = form.getAttribute('action') || '';
 
@@ -1550,6 +1594,12 @@
 
         event.preventDefault();
 
+        if (form.dataset.loading === 'true') {
+            return;
+        }
+
+        form.dataset.loading = 'true';
+
         const button = form.querySelector('button[type="submit"]');
         const originalText = button ? button.innerHTML : '';
 
@@ -1558,41 +1608,44 @@
             button.innerHTML = 'Adding...';
         }
 
-        fetch(action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'Accept': 'application/json'
-            },
-            credentials: 'same-origin'
-        })
-            .then(async function (response) {
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw data;
-                }
-
-                return data;
-            })
-            .then(function (data) {
-                showAjaxMessage(data.message, 'success');
-                updateCartCount(data.cart_count);
-            })
-            .catch(function (error) {
-                showAjaxMessage(error.message || 'Something went wrong.', 'error');
-
-                if (error.cart_count !== undefined) {
-                    updateCartCount(error.cart_count);
-                }
-            })
-            .finally(function () {
-                if (button) {
-                    button.disabled = false;
-                    button.innerHTML = originalText;
-                }
+        try {
+            const response = await fetch(action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                },
+                credentials: 'same-origin'
             });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                showAjaxMessage(data.message || 'Something went wrong.', 'error');
+
+                if (data.cart_count !== undefined) {
+                    updateCartCount(data.cart_count);
+                }
+
+                return;
+            }
+
+            showAjaxMessage(data.message || 'Product added to cart.', 'success');
+
+            if (data.cart_count !== undefined) {
+                updateCartCount(data.cart_count);
+            }
+        } catch (error) {
+            showAjaxMessage('Something went wrong. Please try again.', 'error');
+        } finally {
+            form.dataset.loading = 'false';
+
+            if (button) {
+                button.disabled = false;
+                button.innerHTML = originalText;
+            }
+        }
     });
 
     function updateCartCount(count) {

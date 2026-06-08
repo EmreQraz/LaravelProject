@@ -23,52 +23,52 @@ class CartController extends Controller
 
     public function add(Request $request, Product $product)
     {
-        $request->validate([
-            'quantity' => 'nullable|integer|min:1',
-        ]);
+        if ($product->stock <= 0) {
+            $cartCount = Cart::where('user_id', auth()->id())->sum('quantity');
 
-        $quantity = $request->quantity ?? 1;
-
-        if ($product->stock < $quantity) {
             if ($request->expectsJson()) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Not enough stock available.',
+                    'message' => 'This product is out of stock.',
+                    'cart_count' => $cartCount,
                 ], 422);
             }
-            return redirect()->back()->with('error', 'Not enough stock available.');
+
+            return redirect()->back()->with('error', 'This product is out of stock.');
         }
 
-        // Check if product already in cart
-        $cart = Cart::where('user_id', Auth::id())
+        $cartItem = Cart::where('user_id', auth()->id())
             ->where('product_id', $product->id)
             ->first();
 
-        if ($cart) {
-            $newQuantity = $cart->quantity + $quantity;
-            if ($product->stock < $newQuantity) {
-                if ($request->expectsJson()) {
-                    return response()->json([
-                        'success' => false,
-                        'message' => 'You cannot add more than the available stock.',
-                    ], 422);
-                }
-                return redirect()->back()->with('error', 'You cannot add more than the available stock.');
+        $currentQuantity = $cartItem ? $cartItem->quantity : 0;
+
+        if ($currentQuantity >= $product->stock) {
+            $cartCount = Cart::where('user_id', auth()->id())->sum('quantity');
+
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'You cannot add more than the available stock for ' . $product->name . '.',
+                    'cart_count' => $cartCount,
+                ], 422);
             }
-            $cart->update([
-                'quantity' => $newQuantity,
-                'price' => $product->price,
-            ]);
+
+            return redirect()->back()->with('error', 'You cannot add more than the available stock for ' . $product->name . '.');
+        }
+
+        if ($cartItem) {
+            $cartItem->increment('quantity');
         } else {
             Cart::create([
-                'user_id' => Auth::id(),
+                'user_id' => auth()->id(),
                 'product_id' => $product->id,
-                'quantity' => $quantity,
+                'quantity' => 1,
                 'price' => $product->price,
             ]);
         }
 
-        $cartCount = Cart::where('user_id', Auth::id())->sum('quantity');
+        $cartCount = Cart::where('user_id', auth()->id())->sum('quantity');
 
         if ($request->expectsJson()) {
             return response()->json([

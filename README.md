@@ -87,7 +87,6 @@ DB_PASSWORD=
 * Admin dashboard access
 * Role-based admin authorization
 * Product management
-* Category management
 * Product create, edit, delete
 * Admin product show page
 * Product stock management
