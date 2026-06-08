@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('customer_name');
             $table->string('customer_email');
             $table->decimal('total_price', 10, 2);
-            $table->string('status')->default('completed');
+            $table->string('status')->default('New');
 
             $table->timestamps();
         });

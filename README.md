@@ -212,6 +212,8 @@ The campaign section includes a call-to-action button that directs users to the 
 
 ## How to Run the Project
 
+Make sure PHP 8.2 or higher is installed.
+
 ### 1. Start XAMPP
 
 Open XAMPP Control Panel and start:
@@ -286,6 +288,7 @@ Run:
 ```bash
 composer install
 npm install
+npm run build
 ```
 
 ---
