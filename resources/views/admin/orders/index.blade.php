@@ -6,7 +6,43 @@
 
     <div class="admin-box">
         <h2>Orders</h2>
-        <p>Admin can view customer orders from this page.</p>
+        <div class="about-section" style="margin-bottom: 25px;">
+            <h3>Filter Orders</h3>
+            <p>Filter customer orders by current order status.</p>
+
+            <form action="{{ route('admin.orders.index') }}" method="GET" style="margin-top: 15px;">
+                <div class="form-row">
+                    <p>
+                        <label>Status</label>
+                        <select name="status">
+                            <option value="">All Orders</option>
+
+                            @foreach($statuses as $item)
+                                <option value="{{ $item }}" {{ $status === $item ? 'selected' : '' }}>
+                                    {{ $item }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </p>
+
+                    <p style="display: flex; align-items: end; gap: 10px;">
+                        <button type="submit" class="btn">
+                            Filter
+                        </button>
+
+                        <a href="{{ route('admin.orders.index') }}" class="btn btn-secondary">
+                            Clear
+                        </a>
+                    </p>
+                </div>
+            </form>
+        </div>
+        <p>
+            Admin can view and filter customer orders from this page.
+            @if($status)
+                Currently showing: <strong>{{ $status }}</strong> orders.
+            @endif
+        </p>
 
         <br>
 

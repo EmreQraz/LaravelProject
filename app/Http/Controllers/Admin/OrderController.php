@@ -8,11 +8,20 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::with('user')->latest()->get();
+        $status = $request->status;
 
-        return view('admin.orders.index', compact('orders'));
+        $orders = Order::with('user')
+            ->when($status, function ($query) use ($status) {
+                return $query->where('status', $status);
+            })
+            ->latest()
+            ->get();
+
+        $statuses = Order::STATUSES;
+
+        return view('admin.orders.index', compact('orders', 'statuses', 'status'));
     }
 
     public function show(Order $order)
