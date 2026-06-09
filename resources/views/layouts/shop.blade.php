@@ -1382,9 +1382,7 @@
             .campaign-link {
                 margin-left: 0;
             }
-        }
 
-        @media (max-width: 900px) {
             .navbar {
                 padding: 16px 25px;
                 flex-direction: column;
@@ -1419,6 +1417,7 @@
             .admin-stats {
                 grid-template-columns: 1fr;
             }
+
             .info-grid {
                 grid-template-columns: 1fr;
             }
@@ -1457,7 +1456,7 @@
         </span>
             </a>
         @else
-            <a href="/login" class="nav-link {{ request()->is('login') ? 'active' : '' }}">
+            <a href="/login" class="nav-link">
                 Cart
             </a>
         @endauth

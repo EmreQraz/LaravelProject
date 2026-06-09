@@ -17,7 +17,7 @@ The system is designed as a simple but functional online shopping platform. User
 ## Technologies Used
 
 * Laravel
-* PHP
+* PHP 8.2 or higher
 * MySQL
 * XAMPP
 * phpMyAdmin
