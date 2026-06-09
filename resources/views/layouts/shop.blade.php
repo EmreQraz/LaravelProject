@@ -888,14 +888,29 @@
             animation: softFade 0.4s ease both;
         }
 
-        .status-new {
+        .status-badge.status-new {
             background-color: #dbeafe;
             color: #1d4ed8;
         }
 
-        .status-accepted {
+        .status-badge.status-accepted {
             background-color: #ede9fe;
             color: #6d28d9;
+        }
+
+        .status-badge.status-cancelled {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-badge.status-onshipping {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-badge.status-completed {
+            background-color: #dcfce7;
+            color: #166534;
         }
 
         .status-cancelled {
