@@ -1368,19 +1368,20 @@
             .form-row {
                 grid-template-columns: 1fr;
             }
-        }
-        .shipping-campaign {
-            padding: 14px 22px;
-        }
 
-        .shipping-campaign-content {
-            flex-direction: column;
-            text-align: center;
-            gap: 10px;
-        }
+            .shipping-campaign {
+                padding: 14px 22px;
+            }
 
-        .campaign-link {
-            margin-left: 0;
+            .shipping-campaign-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .campaign-link {
+                margin-left: 0;
+            }
         }
 
         @media (max-width: 900px) {
@@ -1540,49 +1541,7 @@
         <p>© 2026 QrazCart | Advanced Web Programming Final Project</p>
     </div>
 </footer>
-<script>
-    function updateCartCount(count) {
-        const badge = document.getElementById('cart-count-badge');
 
-        if (!badge) {
-            return;
-        }
-
-        badge.textContent = count;
-
-        if (count > 0) {
-            badge.style.display = 'inline-flex';
-        } else {
-            badge.style.display = 'none';
-        }
-    }
-
-    function showAjaxMessage(message, type) {
-        const oldMessage = document.querySelector('.ajax-toast');
-
-        if (oldMessage) {
-            oldMessage.remove();
-        }
-
-        const toast = document.createElement('div');
-        toast.className = 'ajax-toast ajax-toast-' + type;
-        toast.textContent = message;
-
-        document.body.appendChild(toast);
-
-        setTimeout(function () {
-            toast.classList.add('show');
-        }, 50);
-
-        setTimeout(function () {
-            toast.classList.remove('show');
-
-            setTimeout(function () {
-                toast.remove();
-            }, 300);
-        }, 2500);
-    }
-</script>
 <script>
     document.addEventListener('submit', async function (event) {
         const form = event.target;

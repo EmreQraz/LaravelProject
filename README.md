@@ -10,7 +10,7 @@
 
 QrazCart is a Laravel-based e-commerce web application. The project includes product listing, category filtering, user authentication, role-based admin access, shopping cart, checkout, order management, stock control, and admin product/order management features.
 
-The system is designed as a simple but functional online shopping platform. Users can browse products, add items to their cart, place orders, and view their own order history. Admin users can manage products, categories, and orders.
+The system is designed as a simple but functional online shopping platform. Users can browse products, add items to their cart, place orders, and view their own order history. Admin users can manage products and orders.
 
 ---
 
@@ -208,7 +208,6 @@ The campaign section includes a call-to-action button that directs users to the 
 * Admin Product Create
 * Admin Product Edit
 * Admin Product Show
-* Admin Categories
 * Admin Orders
 * Admin Order Details
 
